@@ -20,25 +20,7 @@ export default class LedgerBridge {
     }
 
     addEventListeners () {
-        window.addEventListener('message', async e => {
-            console.log(e);
-            if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
-                console.log(e.data);
-                const { action, params } = e.data
-                const replyAction = `${action}-reply`
-                switch (action) {
-                    case 'ledger-unlock':
-                        this.unlock(replyAction, params.hdPath)
-                        break
-                    case 'ledger-sign-transaction':
-                        this.signTransaction(replyAction, params.hdPath, params.tx, params.to)
-                        break
-                    case 'ledger-sign-personal-message':
-                        this.signPersonalMessage(replyAction, params.hdPath, params.message)
-                        break
-                }
-            }
-        }, false)
+
     }
 
     async makeApp () {
@@ -61,6 +43,7 @@ export default class LedgerBridge {
                 try {
                     const trx = new AppTrx(transport);
                     let {address} = await trx.getAddress(this.path, confirm);
+                    console.log(address)
                     resolve({
                         address,
                         connected: true,
