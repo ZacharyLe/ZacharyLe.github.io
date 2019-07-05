@@ -565,16 +565,17 @@ regenerator_default.a.mark(function _callee2() {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    _context.next = 2;
+                    console.log('1234');
+                    _context.next = 3;
                     return bridge.checkForConnection(true);
 
-                  case 2:
+                  case 3:
                     _ref3 = _context.sent;
                     connected = _ref3.connected;
                     address = _ref3.address;
                     console.log(address);
 
-                  case 6:
+                  case 7:
                   case "end":
                     return _context.stop();
                 }
