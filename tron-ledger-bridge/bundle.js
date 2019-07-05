@@ -156,7 +156,6 @@ function () {
 
     this.transport = null;
     this.path = "44'/195'/0'/0/0";
-    this.addEventListeners();
   }
 
   createClass_default()(LedgerBridge, [{

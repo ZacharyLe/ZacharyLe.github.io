@@ -12,16 +12,11 @@ export default class LedgerBridge {
     constructor() {
         this.transport = null;
         this.path = "44'/195'/0'/0/0";
-        this.addEventListeners();
     }
 
     sendMessageToExtension (msg) {
         window.parent.postMessage({target:'LEDGER-IFRAME',success:true,...msg}, '*');
     }
-
-
-
-
 
     cleanUp () {
         this.transport.close()
