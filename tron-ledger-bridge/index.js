@@ -9,7 +9,7 @@ import LedgerBridge from './ledger/LedgerBridge'
     window.addEventListener('message', async e => {
         console.log(e);
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
-            console.log(e.data);
+            console.log(e.data,e.data.data);
             if(e.data.data === 'connect ledger'){
                 let {connected, address} = await bridge.checkForConnection(true);
                 console.log(address);

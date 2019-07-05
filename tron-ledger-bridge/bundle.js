@@ -550,7 +550,7 @@ regenerator_default.a.mark(function _callee2() {
                         break;
                       }
 
-                      console.log(e.data);
+                      console.log(e.data, e.data.data);
 
                       if (!(e.data.data === 'connect ledger')) {
                         _context.next = 10;
