@@ -160,34 +160,50 @@ function () {
   }, {
     key: "addEventListeners",
     value: function addEventListeners() {
-      console.log('@@@@@@@');
+      var _this = this;
+
       window.addEventListener('message',
       /*#__PURE__*/
       function () {
         var _ref = asyncToGenerator_default()(
         /*#__PURE__*/
         regenerator_default.a.mark(function _callee(e) {
+          var _e$data, action, params, replyAction;
+
           return regenerator_default.a.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  console.log(e); // if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
-                  //     const { action, params } = e.data
-                  //     const replyAction = `${action}-reply`
-                  //     switch (action) {
-                  //         case 'ledger-unlock':
-                  //             this.unlock(replyAction, params.hdPath)
-                  //             break
-                  //         case 'ledger-sign-transaction':
-                  //             this.signTransaction(replyAction, params.hdPath, params.tx, params.to)
-                  //             break
-                  //         case 'ledger-sign-personal-message':
-                  //             this.signPersonalMessage(replyAction, params.hdPath, params.message)
-                  //             break
-                  //     }
-                  // }
+                  console.log(e);
 
-                case 1:
+                  if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
+                    _context.next = 14;
+                    break;
+                  }
+
+                  console.log(e.data);
+                  _e$data = e.data, action = _e$data.action, params = _e$data.params;
+                  replyAction = "".concat(action, "-reply");
+                  _context.t0 = action;
+                  _context.next = _context.t0 === 'ledger-unlock' ? 8 : _context.t0 === 'ledger-sign-transaction' ? 10 : _context.t0 === 'ledger-sign-personal-message' ? 12 : 14;
+                  break;
+
+                case 8:
+                  _this.unlock(replyAction, params.hdPath);
+
+                  return _context.abrupt("break", 14);
+
+                case 10:
+                  _this.signTransaction(replyAction, params.hdPath, params.tx, params.to);
+
+                  return _context.abrupt("break", 14);
+
+                case 12:
+                  _this.signPersonalMessage(replyAction, params.hdPath, params.message);
+
+                  return _context.abrupt("break", 14);
+
+                case 14:
                 case "end":
                   return _context.stop();
               }
@@ -251,7 +267,7 @@ function () {
       var _checkForConnection = asyncToGenerator_default()(
       /*#__PURE__*/
       regenerator_default.a.mark(function _callee4() {
-        var _this = this;
+        var _this2 = this;
 
         var confirm,
             _args4 = arguments;
@@ -280,7 +296,7 @@ function () {
                             _context3.prev = 3;
                             trx = new Tron["default"](transport);
                             _context3.next = 7;
-                            return trx.getAddress(_this.path, confirm);
+                            return trx.getAddress(_this2.path, confirm);
 
                           case 7:
                             _ref3 = _context3.sent;
@@ -398,7 +414,7 @@ function () {
       var _getAddress = asyncToGenerator_default()(
       /*#__PURE__*/
       regenerator_default.a.mark(function _callee7() {
-        var _this2 = this;
+        var _this3 = this;
 
         return regenerator_default.a.wrap(function _callee7$(_context7) {
           while (1) {
@@ -424,7 +440,7 @@ function () {
                             _context6.prev = 3;
                             trx = new Tron["default"](transport);
                             _context6.next = 7;
-                            return trx.getAddress(_this2.path);
+                            return trx.getAddress(_this3.path);
 
                           case 7:
                             _ref5 = _context6.sent;
@@ -476,7 +492,7 @@ function () {
       var _signTransaction = asyncToGenerator_default()(
       /*#__PURE__*/
       regenerator_default.a.mark(function _callee9(transaction) {
-        var _this3 = this;
+        var _this4 = this;
 
         return regenerator_default.a.wrap(function _callee9$(_context9) {
           while (1) {
@@ -501,7 +517,7 @@ function () {
                             _context8.prev = 3;
                             trx = new Tron["default"](transport);
                             _context8.next = 7;
-                            return trx.signTransactionWithTokenName(_this3.path, transaction.hex, transaction.info);
+                            return trx.signTransactionWithTokenName(_this4.path, transaction.hex, transaction.info);
 
                           case 7:
                             response = _context8.sent;
