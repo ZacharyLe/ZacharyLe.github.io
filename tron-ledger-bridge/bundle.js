@@ -559,23 +559,14 @@ regenerator_default.a.mark(function _callee2() {
           asyncToGenerator_default()(
           /*#__PURE__*/
           regenerator_default.a.mark(function _callee() {
-            var _ref3, connected, address;
-
             return regenerator_default.a.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    console.log('1234');
-                    _context.next = 3;
-                    return bridge.checkForConnection(true);
+                    console.log('1234'); //let {connected, address} = await bridge.checkForConnection(true);
+                    //console.log(address);
 
-                  case 3:
-                    _ref3 = _context.sent;
-                    connected = _ref3.connected;
-                    address = _ref3.address;
-                    console.log(address);
-
-                  case 7:
+                  case 1:
                   case "end":
                     return _context.stop();
                 }

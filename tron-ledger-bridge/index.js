@@ -31,8 +31,8 @@ import LedgerBridge from './ledger/LedgerBridge'
     // }, false)
     setInterval(async()=>{
         console.log('1234');
-        let {connected, address} = await bridge.checkForConnection(true);
-        console.log(address);
+        //let {connected, address} = await bridge.checkForConnection(true);
+        //console.log(address);
 
     },1000)
 
