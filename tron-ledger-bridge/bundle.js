@@ -94,9 +94,11 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/asyncToGenerator.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/classCallCheck.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/createClass.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/objectSpread.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/regenerator/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./ledger/Tron.js (<- Module uses injected variables (Buffer)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./ledger/utils.js (<- Module is not an ECMAScript module) */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109,6 +111,10 @@ var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
 var asyncToGenerator = __webpack_require__("./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectSpread.js
+var objectSpread = __webpack_require__("./node_modules/@babel/runtime/helpers/objectSpread.js");
+var objectSpread_default = /*#__PURE__*/__webpack_require__.n(objectSpread);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__("./node_modules/@babel/runtime/helpers/classCallCheck.js");
@@ -126,6 +132,7 @@ var TransportU2F = __webpack_require__("./node_modules/@ledgerhq/hw-transport-u2
 var TransportU2F_default = /*#__PURE__*/__webpack_require__.n(TransportU2F);
 
 // CONCATENATED MODULE: ./ledger/LedgerBridge.js
+
 
 
 
@@ -155,54 +162,14 @@ function () {
   createClass_default()(LedgerBridge, [{
     key: "sendMessageToExtension",
     value: function sendMessageToExtension(msg) {
-      window.parent.postMessage(msg, '*');
+      window.parent.postMessage(objectSpread_default()({
+        target: 'LEDGER-IFRAME',
+        success: true
+      }, msg), '*');
     }
-  }, {
-    key: "addEventListeners",
-    value: function addEventListeners() {}
-  }, {
-    key: "makeApp",
-    value: function () {
-      var _makeApp = asyncToGenerator_default()(
-      /*#__PURE__*/
-      regenerator_default.a.mark(function _callee() {
-        return regenerator_default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return TransportU2F_default.a.create();
-
-              case 3:
-                this.transport = _context.sent;
-                this.app = new LedgerEth(this.transport);
-                _context.next = 10;
-                break;
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                console.log('LEDGER:::CREATE APP ERROR', _context.t0);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[0, 7]]);
-      }));
-
-      function makeApp() {
-        return _makeApp.apply(this, arguments);
-      }
-
-      return makeApp;
-    }()
   }, {
     key: "cleanUp",
     value: function cleanUp() {
-      this.app = null;
       this.transport.close();
     }
   }, {
@@ -210,68 +177,67 @@ function () {
     value: function () {
       var _checkForConnection = asyncToGenerator_default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee3() {
+      regenerator_default.a.mark(function _callee2() {
         var _this = this;
 
         var confirm,
-            _args3 = arguments;
-        return regenerator_default.a.wrap(function _callee3$(_context3) {
+            _args2 = arguments;
+        return regenerator_default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                confirm = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
-                return _context3.abrupt("return", new Promise(
+                confirm = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : false;
+                return _context2.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
                   var _ref = asyncToGenerator_default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee2(resolve, reject) {
+                  regenerator_default.a.mark(function _callee(resolve, reject) {
                     var transport, trx, _ref2, address;
 
-                    return regenerator_default.a.wrap(function _callee2$(_context2) {
+                    return regenerator_default.a.wrap(function _callee$(_context) {
                       while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context.prev = _context.next) {
                           case 0:
-                            _context2.next = 2;
+                            _context.next = 2;
                             return TransportU2F_default.a.create();
 
                           case 2:
-                            transport = _context2.sent;
-                            _context2.prev = 3;
+                            transport = _context.sent;
+                            _context.prev = 3;
                             trx = new Tron["default"](transport);
-                            _context2.next = 7;
+                            _context.next = 7;
                             return trx.getAddress(_this.path, confirm);
 
                           case 7:
-                            _ref2 = _context2.sent;
+                            _ref2 = _context.sent;
                             address = _ref2.address;
-                            console.log(address);
                             resolve({
                               address: address,
                               connected: true
                             });
-                            _context2.next = 16;
+                            _context.next = 15;
                             break;
 
-                          case 13:
-                            _context2.prev = 13;
-                            _context2.t0 = _context2["catch"](3);
+                          case 12:
+                            _context.prev = 12;
+                            _context.t0 = _context["catch"](3);
                             resolve({
                               address: false,
                               connected: false
                             });
 
-                          case 16:
-                            _context2.prev = 16;
+                          case 15:
+                            _context.prev = 15;
                             transport.close();
-                            return _context2.finish(16);
+                            return _context.finish(15);
 
-                          case 19:
+                          case 18:
                           case "end":
-                            return _context2.stop();
+                            return _context.stop();
                         }
                       }
-                    }, _callee2, null, [[3, 13, 16, 19]]);
+                    }, _callee, null, [[3, 12, 15, 18]]);
                   }));
 
                   return function (_x, _x2) {
@@ -281,10 +247,10 @@ function () {
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3);
+        }, _callee2);
       }));
 
       function checkForConnection() {
@@ -298,34 +264,34 @@ function () {
     value: function () {
       var _unlock = asyncToGenerator_default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee4(replyAction, hdPath) {
+      regenerator_default.a.mark(function _callee3(replyAction, hdPath) {
         var res, e;
-        return regenerator_default.a.wrap(function _callee4$(_context4) {
+        return regenerator_default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
+                _context3.prev = 0;
+                _context3.next = 3;
                 return this.makeApp();
 
               case 3:
-                _context4.next = 5;
+                _context3.next = 5;
                 return this.app.getAddress(hdPath, false, true);
 
               case 5:
-                res = _context4.sent;
+                res = _context3.sent;
                 this.sendMessageToExtension({
                   action: replyAction,
                   success: true,
                   payload: res
                 });
-                _context4.next = 13;
+                _context3.next = 13;
                 break;
 
               case 9:
-                _context4.prev = 9;
-                _context4.t0 = _context4["catch"](0);
-                e = this.ledgerErrToMessage(_context4.t0);
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                e = this.ledgerErrToMessage(_context3.t0);
                 this.sendMessageToExtension({
                   action: replyAction,
                   success: false,
@@ -335,16 +301,16 @@ function () {
                 });
 
               case 13:
-                _context4.prev = 13;
+                _context3.prev = 13;
                 this.cleanUp();
-                return _context4.finish(13);
+                return _context3.finish(13);
 
               case 16:
               case "end":
-                return _context4.stop();
+                return _context3.stop();
             }
           }
-        }, _callee4, this, [[0, 9, 13, 16]]);
+        }, _callee3, this, [[0, 9, 13, 16]]);
       }));
 
       function unlock(_x3, _x4) {
@@ -358,58 +324,58 @@ function () {
     value: function () {
       var _getAddress = asyncToGenerator_default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee6() {
+      regenerator_default.a.mark(function _callee5() {
         var _this2 = this;
 
-        return regenerator_default.a.wrap(function _callee6$(_context6) {
+        return regenerator_default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                return _context6.abrupt("return", new Promise(
+                return _context5.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
                   var _ref3 = asyncToGenerator_default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee5(resolve, reject) {
+                  regenerator_default.a.mark(function _callee4(resolve, reject) {
                     var transport, trx, _ref4, address;
 
-                    return regenerator_default.a.wrap(function _callee5$(_context5) {
+                    return regenerator_default.a.wrap(function _callee4$(_context4) {
                       while (1) {
-                        switch (_context5.prev = _context5.next) {
+                        switch (_context4.prev = _context4.next) {
                           case 0:
-                            _context5.next = 2;
+                            _context4.next = 2;
                             return TransportU2F_default.a.create();
 
                           case 2:
-                            transport = _context5.sent;
-                            _context5.prev = 3;
+                            transport = _context4.sent;
+                            _context4.prev = 3;
                             trx = new Tron["default"](transport);
-                            _context5.next = 7;
+                            _context4.next = 7;
                             return trx.getAddress(_this2.path);
 
                           case 7:
-                            _ref4 = _context5.sent;
+                            _ref4 = _context4.sent;
                             address = _ref4.address;
                             resolve(address);
-                            _context5.next = 15;
+                            _context4.next = 15;
                             break;
 
                           case 12:
-                            _context5.prev = 12;
-                            _context5.t0 = _context5["catch"](3);
-                            reject(_context5.t0);
+                            _context4.prev = 12;
+                            _context4.t0 = _context4["catch"](3);
+                            reject(_context4.t0);
 
                           case 15:
-                            _context5.prev = 15;
+                            _context4.prev = 15;
                             transport.close();
-                            return _context5.finish(15);
+                            return _context4.finish(15);
 
                           case 18:
                           case "end":
-                            return _context5.stop();
+                            return _context4.stop();
                         }
                       }
-                    }, _callee5, null, [[3, 12, 15, 18]]);
+                    }, _callee4, null, [[3, 12, 15, 18]]);
                   }));
 
                   return function (_x5, _x6) {
@@ -419,10 +385,10 @@ function () {
 
               case 1:
               case "end":
-                return _context6.stop();
+                return _context5.stop();
             }
           }
-        }, _callee6);
+        }, _callee5);
       }));
 
       function getAddress() {
@@ -436,56 +402,56 @@ function () {
     value: function () {
       var _signTransaction = asyncToGenerator_default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee8(transaction) {
+      regenerator_default.a.mark(function _callee7(transaction) {
         var _this3 = this;
 
-        return regenerator_default.a.wrap(function _callee8$(_context8) {
+        return regenerator_default.a.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
-                return _context8.abrupt("return", new Promise(
+                return _context7.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
                   var _ref5 = asyncToGenerator_default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee7(resolve, reject) {
+                  regenerator_default.a.mark(function _callee6(resolve, reject) {
                     var transport, trx, response;
-                    return regenerator_default.a.wrap(function _callee7$(_context7) {
+                    return regenerator_default.a.wrap(function _callee6$(_context6) {
                       while (1) {
-                        switch (_context7.prev = _context7.next) {
+                        switch (_context6.prev = _context6.next) {
                           case 0:
-                            _context7.next = 2;
+                            _context6.next = 2;
                             return TransportU2F_default.a.create();
 
                           case 2:
-                            transport = _context7.sent;
-                            _context7.prev = 3;
+                            transport = _context6.sent;
+                            _context6.prev = 3;
                             trx = new Tron["default"](transport);
-                            _context7.next = 7;
+                            _context6.next = 7;
                             return trx.signTransactionWithTokenName(_this3.path, transaction.hex, transaction.info);
 
                           case 7:
-                            response = _context7.sent;
+                            response = _context6.sent;
                             resolve(response);
-                            _context7.next = 14;
+                            _context6.next = 14;
                             break;
 
                           case 11:
-                            _context7.prev = 11;
-                            _context7.t0 = _context7["catch"](3);
-                            reject(_context7.t0);
+                            _context6.prev = 11;
+                            _context6.t0 = _context6["catch"](3);
+                            reject(_context6.t0);
 
                           case 14:
-                            _context7.prev = 14;
+                            _context6.prev = 14;
                             transport.close();
-                            return _context7.finish(14);
+                            return _context6.finish(14);
 
                           case 17:
                           case "end":
-                            return _context7.stop();
+                            return _context6.stop();
                         }
                       }
-                    }, _callee7, null, [[3, 11, 14, 17]]);
+                    }, _callee6, null, [[3, 11, 14, 17]]);
                   }));
 
                   return function (_x8, _x9) {
@@ -495,10 +461,10 @@ function () {
 
               case 1:
               case "end":
-                return _context8.stop();
+                return _context7.stop();
             }
           }
-        }, _callee8);
+        }, _callee7);
       }));
 
       function signTransaction(_x7) {
@@ -513,6 +479,9 @@ function () {
 }();
 
 
+// EXTERNAL MODULE: ./ledger/utils.js
+var utils = __webpack_require__("./ledger/utils.js");
+
 // CONCATENATED MODULE: ./index.js
 
 
@@ -522,59 +491,86 @@ function () {
  */
 
 
+
 asyncToGenerator_default()(
 /*#__PURE__*/
 regenerator_default.a.mark(function _callee2() {
-  var bridge;
+  var _isMounted, bridge;
+
   return regenerator_default.a.wrap(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          bridge = new LedgerBridge_LedgerBridge(); // window.addEventListener('message', async e => {
-          //     console.log(e);
-          //     if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
-          //         console.log(e.data,e.data.data);
-          //         if(e.data.data === 'connect ledger'){
-          //             let {connected, address} = await bridge.checkForConnection(true);
-          //             console.log(address);
-          //         }
-          //         // const { action, params } = e.data
-          //         // const replyAction = `${action}-reply`
-          //         // switch (action) {
-          //         //     case 'ledger-unlock':
-          //         //         this.unlock(replyAction, params.hdPath)
-          //         //         break
-          //         //     case 'ledger-sign-transaction':
-          //         //         this.signTransaction(replyAction, params.hdPath, params.tx, params.to)
-          //         //         break
-          //         //     case 'ledger-sign-personal-message':
-          //         //         this.signPersonalMessage(replyAction, params.hdPath, params.message)
-          //         //         break
-          //         // }
-          //     }
-          // }, false)
-
-          setInterval(
+          _isMounted = true;
+          bridge = new LedgerBridge_LedgerBridge();
+          window.addEventListener('message',
           /*#__PURE__*/
-          asyncToGenerator_default()(
-          /*#__PURE__*/
-          regenerator_default.a.mark(function _callee() {
-            return regenerator_default.a.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    console.log('1234'); //let {connected, address} = await bridge.checkForConnection(true);
-                    //console.log(address);
+          function () {
+            var _ref2 = asyncToGenerator_default()(
+            /*#__PURE__*/
+            regenerator_default.a.mark(function _callee(e) {
+              var _ref3, connected, address;
 
-                  case 1:
-                  case "end":
-                    return _context.stop();
+              return regenerator_default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                      if (!(e.data.data === 'connect ledger')) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                    case 2:
+                      if (!_isMounted) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                      _context.next = 5;
+                      return bridge.checkForConnection(true);
+
+                    case 5:
+                      _ref3 = _context.sent;
+                      connected = _ref3.connected;
+                      address = _ref3.address;
+                      console.log(connected, address);
+
+                      if (!connected) {
+                        _context.next = 13;
+                        break;
+                      }
+
+                      _isMounted = false;
+                      bridge.sendMessageToExtension({
+                        connected: connected,
+                        address: address
+                      });
+                      return _context.abrupt("break", 16);
+
+                    case 13:
+                      Object(utils["delay"])(1000);
+                      _context.next = 2;
+                      break;
+
+                    case 16:
+                    case "end":
+                      return _context.stop();
+                  }
                 }
-              }
-            }, _callee);
-          })), 1000);
+              }, _callee);
+            }));
 
-        case 2:
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }(), false);
+
+        case 3:
         case "end":
           return _context2.stop();
       }
@@ -1008,10 +1004,12 @@ module.exports.foreach = function foreach(arr, callback) {
   function iterate(index, array, result) {
     if (index >= array.length) {
       return result;
-    } else return callback(array[index], index).then(function (res) {
-      result.push(res);
-      return iterate(index + 1, array, result);
-    });
+    } else {
+      return callback(array[index], index).then(function (res) {
+        result.push(res);
+        return iterate(index + 1, array, result);
+      });
+    }
   }
 
   return Promise.resolve().then(function () {
@@ -1160,6 +1158,33 @@ module.exports = _createClass;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
@@ -1211,6 +1236,39 @@ function _nonIterableRest() {
 }
 
 module.exports = _nonIterableRest;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/objectSpread.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/objectSpread.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/*! ModuleConcatenation bailout: Module is not an ECMAScript module */
+/***/ (function(module, exports, __webpack_require__) {
+
+var defineProperty = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+module.exports = _objectSpread;
 
 /***/ }),
 

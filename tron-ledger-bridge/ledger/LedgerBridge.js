@@ -16,24 +16,14 @@ export default class LedgerBridge {
     }
 
     sendMessageToExtension (msg) {
-        window.parent.postMessage(msg, '*')
+        window.parent.postMessage({target:'LEDGER-IFRAME',success:true,...msg}, '*');
     }
 
-    addEventListeners () {
 
-    }
 
-    async makeApp () {
-        try {
-            this.transport = await Transport.create()
-            this.app = new LedgerEth(this.transport)
-        } catch (e) {
-            console.log('LEDGER:::CREATE APP ERROR', e)
-        }
-    }
+
 
     cleanUp () {
-        this.app = null
         this.transport.close()
     }
 
@@ -43,7 +33,6 @@ export default class LedgerBridge {
                 try {
                     const trx = new AppTrx(transport);
                     let {address} = await trx.getAddress(this.path, confirm);
-                    console.log(address)
                     resolve({
                         address,
                         connected: true,
@@ -86,17 +75,17 @@ export default class LedgerBridge {
 
     async getAddress() {
         return new Promise(async (resolve, reject) => {
-                const transport = await Transport.create();
-        try {
-            const trx = new AppTrx(transport);
-            let {address} = await trx.getAddress(this.path);
-            resolve(address);
-        } catch(e) {
-            reject(e);
-        } finally {
-            transport.close();
-        }
-    });
+            const transport = await Transport.create();
+            try {
+                const trx = new AppTrx(transport);
+                let {address} = await trx.getAddress(this.path);
+                resolve(address);
+            } catch(e) {
+                reject(e);
+            } finally {
+                transport.close();
+            }
+        });
     }
 
     async signTransaction(transaction) {

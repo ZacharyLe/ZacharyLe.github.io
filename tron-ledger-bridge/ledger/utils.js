@@ -29,49 +29,41 @@ module.exports.splitPath = function splitPath(path) {
     let components = path.split("/");
     components.forEach(element => {
         let number = parseInt(element, 10);
-    if (isNaN(number)) {
-        return; // FIXME shouldn't it throws instead?
-    }
-    if (element.length > 1 && element[element.length - 1] === "'") {
-        number += 0x80000000;
-    }
-    result.push(number);
-});
+        if (isNaN(number)) {
+            return; // FIXME shouldn't it throws instead?
+        }
+        if (element.length > 1 && element[element.length - 1] === "'") {
+            number += 0x80000000;
+        }
+        result.push(number);
+    });
     return result;
-}
+};
 // TODO use async await
 module.exports.eachSeries = function eachSeries(arr, fun) {
     return arr.reduce((p, e) => p.then(() => fun(e)), Promise.resolve());
 };
-module.exports.foreach = function foreach(
-    arr,
-    callback
-) {
+module.exports.foreach = function foreach(arr, callback) {
     function iterate(index, array, result) {
         if (index >= array.length) {
             return result;
-        } else
-            return callback(array[index], index).then(function(res) {
+        } else {
+            return callback(array[index], index).then(function (res) {
                 result.push(res);
                 return iterate(index + 1, array, result);
             });
+        }
     }
     return Promise.resolve().then(() => iterate(0, arr, []));
-}
-module.exports.doIf = function doIf(
-    condition,
-    callback
-) {
+};
+module.exports.doIf = function doIf(condition, callback) {
     return Promise.resolve().then(() => {
-            if (condition) {
-                return callback();
-            }
-        });
-}
-module.exports.asyncWhile =  function asyncWhile(
-    predicate,
-    callback
-)  {
+        if (condition) {
+            return callback();
+        }
+    });
+};
+module.exports.asyncWhile =  function asyncWhile(predicate, callback)  {
     function iterate(result) {
         if (!predicate()) {
             return result;
@@ -86,6 +78,6 @@ module.exports.asyncWhile =  function asyncWhile(
 };
 module.exports.delay = function(timeout) {
     return new Promise(resolve => {
-            setTimeout(resolve, timeout);
-});
-}
+        setTimeout(resolve, timeout);
+    });
+};
