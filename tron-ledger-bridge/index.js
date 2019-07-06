@@ -46,7 +46,7 @@ import { delay } from './ledger/utils';
             // }
         }
     }, false)
-    while (!_isMounted) {
+    while (!_isTronWeb) {
         if(window.tronWeb && window.defaultAddress){
             _isTronWeb = true;
             tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);

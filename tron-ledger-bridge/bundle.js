@@ -220,7 +220,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             };
           }(), false);
 
-          while (!_isMounted) {
+          while (!_isTronWeb) {
             if (window.tronWeb && window.defaultAddress) {
               _isTronWeb = true;
               tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
