@@ -115,13 +115,14 @@ __webpack_require__.r(__webpack_exports__);
 _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
 /*#__PURE__*/
 _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var _isMounted, bridge;
+  var _isMounted, _isTronWeb, bridge;
 
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _isMounted = true;
+          _isTronWeb = false;
           bridge = new _ledger_LedgerBridge__WEBPACK_IMPORTED_MODULE_2__["default"](); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
           //return tronWeb;
 
@@ -219,7 +220,17 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             };
           }(), false);
 
-        case 3:
+          while (!_isMounted) {
+            if (window.tronWeb && window.defaultAddress) {
+              _isTronWeb = true;
+              tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+              console.log(tronWeb.defaultAddress);
+            }
+
+            Object(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
+          }
+
+        case 5:
         case "end":
           return _context2.stop();
       }
@@ -227,9 +238,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
   }, _callee2);
 }))();
 
-console.log(tronWeb.defaultAddress);
 console.log('Tronlink < = > Ledger Bridge initialized!');
-tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
 
 /***/ }),
 
