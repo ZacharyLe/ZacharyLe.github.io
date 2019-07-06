@@ -227,19 +227,12 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
   }, _callee2);
 }))();
 
-var _isTronWeb = false;
-
-while (!_isTronWeb) {
-  if (window.tronWeb && window.defaultAddress) {
-    _isTronWeb = true;
+var checkTronWeb = setInterval(function () {
+  if (tronWeb && tronWeb["default"].base58) {
+    clearInterval(checkTronWeb);
     tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-    console.log(tronWeb.defaultAddress);
-    break;
   }
-
-  Object(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
-}
-
+}, 1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
 
 /***/ }),

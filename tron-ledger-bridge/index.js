@@ -46,15 +46,11 @@ import { delay } from './ledger/utils';
         }
     }, false)
 })()
-let _isTronWeb = false;
-while (!_isTronWeb) {
-    if(window.tronWeb && window.defaultAddress){
-        _isTronWeb = true;
+var checkTronWeb = setInterval(()=>{
+    if(tronWeb && tronWeb.default.base58){
+        clearInterval(checkTronWeb);
         tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-        console.log(tronWeb.defaultAddress);
-        break;
     }
-    delay(1000);
-}
+},1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
 
