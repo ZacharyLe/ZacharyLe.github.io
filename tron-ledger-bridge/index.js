@@ -3,7 +3,7 @@
  */
 import LedgerBridge from './ledger/LedgerBridge'
 import { delay } from './ledger/utils';
-const bridge = new LedgerBridge();
+let bridge = new LedgerBridge();
 (async () => {
     let _isMounted = true;
     //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
