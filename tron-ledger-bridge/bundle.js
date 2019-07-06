@@ -98,6 +98,7 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/regenerator/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./ledger/Tron.js (<- Module uses injected variables (Buffer)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./ledger/utils.js (<- Module is not an ECMAScript module) */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -484,8 +485,6 @@ var utils = __webpack_require__("./ledger/utils.js");
 
 
 
-var index_this = undefined;
-
 /**
  * Created by tron on 2019/7/4.
  */
@@ -502,13 +501,78 @@ regenerator_default.a.mark(function _callee2() {
       switch (_context2.prev = _context2.next) {
         case 0:
           _isMounted = true;
-          bridge = new LedgerBridge_LedgerBridge(); // if (typeof window.tronWeb === 'undefined') {
+          bridge = new LedgerBridge_LedgerBridge();
+          console.log(tronWeb.defaultAddress); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
+          //return tronWeb;
 
-          console.log(tronWeb.defaultAddress);
-          tronWeb.trx.sign = index_this.buildTransactionSigner(tronWeb);
-          return _context2.abrupt("return", tronWeb);
+          window.addEventListener('message',
+          /*#__PURE__*/
+          function () {
+            var _ref2 = asyncToGenerator_default()(
+            /*#__PURE__*/
+            regenerator_default.a.mark(function _callee(e) {
+              var _ref3, connected, address;
 
-        case 6:
+              return regenerator_default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                      if (!(e.data.data === 'connect ledger')) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                    case 2:
+                      if (!_isMounted) {
+                        _context.next = 16;
+                        break;
+                      }
+
+                      _context.next = 5;
+                      return bridge.checkForConnection(true);
+
+                    case 5:
+                      _ref3 = _context.sent;
+                      connected = _ref3.connected;
+                      address = _ref3.address;
+                      console.log(connected, address);
+
+                      if (!connected) {
+                        _context.next = 13;
+                        break;
+                      }
+
+                      _isMounted = false;
+                      bridge.sendMessageToExtension({
+                        connected: connected,
+                        address: address
+                      });
+                      return _context.abrupt("break", 16);
+
+                    case 13:
+                      Object(utils["delay"])(1000);
+                      _context.next = 2;
+                      break;
+
+                    case 16:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }(), false);
+
+        case 4:
         case "end":
           return _context2.stop();
       }
