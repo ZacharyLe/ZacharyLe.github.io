@@ -3,10 +3,9 @@
  */
 import LedgerBridge from './ledger/LedgerBridge'
 import { delay } from './ledger/utils';
-
+const bridge = new LedgerBridge();
 (async () => {
     let _isMounted = true;
-    const bridge = new LedgerBridge();
     //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
     //return tronWeb;
     window.addEventListener('message', async e => {
@@ -45,15 +44,14 @@ import { delay } from './ledger/utils';
             // }
         }
     }, false);
-    const checkTronWeb = setInterval(()=>{
-        const tronWeb = window.tronWeb;
-        if(tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58){
-            clearInterval(checkTronWeb);
-            tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-            window.tronWeb = tronWeb;
-        }
-    },1000);
 })()
-
+const checkTronWeb = setInterval(()=>{
+    const tronWeb = window.tronWeb;
+    if(tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58){
+        clearInterval(checkTronWeb);
+        tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+        window.tronWeb = tronWeb;
+    }
+},1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
 

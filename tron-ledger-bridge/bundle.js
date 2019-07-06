@@ -111,18 +111,18 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+var bridge = new _ledger_LedgerBridge__WEBPACK_IMPORTED_MODULE_2__["default"]();
 
 _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
 /*#__PURE__*/
 _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-  var _isMounted, bridge, checkTronWeb;
+  var _isMounted;
 
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _isMounted = true;
-          bridge = new _ledger_LedgerBridge__WEBPACK_IMPORTED_MODULE_2__["default"](); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
+          _isMounted = true; //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
           //return tronWeb;
 
           window.addEventListener('message',
@@ -218,17 +218,8 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
               return _ref2.apply(this, arguments);
             };
           }(), false);
-          checkTronWeb = setInterval(function () {
-            var tronWeb = window.tronWeb;
 
-            if (tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58) {
-              clearInterval(checkTronWeb);
-              tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-              window.tronWeb = tronWeb;
-            }
-          }, 1000);
-
-        case 4:
+        case 2:
         case "end":
           return _context2.stop();
       }
@@ -236,6 +227,15 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
   }, _callee2);
 }))();
 
+var checkTronWeb = setInterval(function () {
+  var tronWeb = window.tronWeb;
+
+  if (tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58) {
+    clearInterval(checkTronWeb);
+    tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+    window.tronWeb = tronWeb;
+  }
+}, 1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
 
 /***/ }),
