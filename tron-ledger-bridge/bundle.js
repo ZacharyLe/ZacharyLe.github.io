@@ -228,9 +228,12 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 }))();
 
 var checkTronWeb = setInterval(function () {
+  var tronWeb = window.tronWeb;
+
   if (tronWeb && tronWeb.defaultAddress.base58) {
     clearInterval(checkTronWeb);
     tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+    window.tronWeb = tronWeb;
   }
 }, 1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
