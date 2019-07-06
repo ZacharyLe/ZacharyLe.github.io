@@ -501,8 +501,7 @@ regenerator_default.a.mark(function _callee2() {
       switch (_context2.prev = _context2.next) {
         case 0:
           _isMounted = true;
-          bridge = new LedgerBridge_LedgerBridge();
-          console.log(tronWeb.defaultAddress); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
+          bridge = new LedgerBridge_LedgerBridge(); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
           //return tronWeb;
 
           window.addEventListener('message',
@@ -518,18 +517,18 @@ regenerator_default.a.mark(function _callee2() {
                   switch (_context.prev = _context.next) {
                     case 0:
                       if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
-                        _context.next = 16;
+                        _context.next = 15;
                         break;
                       }
 
                       if (!(e.data.data === 'connect ledger')) {
-                        _context.next = 16;
+                        _context.next = 15;
                         break;
                       }
 
                     case 2:
                       if (!_isMounted) {
-                        _context.next = 16;
+                        _context.next = 15;
                         break;
                       }
 
@@ -540,10 +539,9 @@ regenerator_default.a.mark(function _callee2() {
                       _ref3 = _context.sent;
                       connected = _ref3.connected;
                       address = _ref3.address;
-                      console.log(connected, address);
 
                       if (!connected) {
-                        _context.next = 13;
+                        _context.next = 12;
                         break;
                       }
 
@@ -552,14 +550,14 @@ regenerator_default.a.mark(function _callee2() {
                         connected: connected,
                         address: address
                       });
-                      return _context.abrupt("break", 16);
+                      return _context.abrupt("break", 15);
 
-                    case 13:
+                    case 12:
                       Object(utils["delay"])(1000);
                       _context.next = 2;
                       break;
 
-                    case 16:
+                    case 15:
                     case "end":
                       return _context.stop();
                   }
@@ -572,7 +570,7 @@ regenerator_default.a.mark(function _callee2() {
             };
           }(), false);
 
-        case 4:
+        case 3:
         case "end":
           return _context2.stop();
       }
@@ -580,7 +578,8 @@ regenerator_default.a.mark(function _callee2() {
   }, _callee2);
 }))();
 
-console.log('MetaMask < = > Ledger Bridge initialized!');
+console.log(tronWeb.defaultAddress);
+console.log('Tronlink < = > Ledger Bridge initialized!');
 
 /***/ }),
 

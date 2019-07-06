@@ -7,7 +7,7 @@ import { delay } from './ledger/utils';
 (async () => {
     let _isMounted = true;
     const bridge = new LedgerBridge();
-    console.log(tronWeb.defaultAddress);
+
     //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
     //return tronWeb;
     window.addEventListener('message', async e => {
@@ -15,7 +15,6 @@ import { delay } from './ledger/utils';
             if(e.data.data === 'connect ledger'){
                 while (_isMounted) {
                     let {connected, address} = await bridge.checkForConnection(true);
-                    console.log(connected, address);
                     if (connected) {
                         _isMounted = false;
                         bridge.sendMessageToExtension({
@@ -27,7 +26,6 @@ import { delay } from './ledger/utils';
                     delay(1000);
                 }
             }
-
         }
     }, false)
 
@@ -37,4 +35,5 @@ import { delay } from './ledger/utils';
 
 
 })()
-console.log('MetaMask < = > Ledger Bridge initialized!')
+console.log(tronWeb.defaultAddress);
+console.log('Tronlink < = > Ledger Bridge initialized!')
