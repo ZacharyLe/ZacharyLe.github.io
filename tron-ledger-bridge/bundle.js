@@ -228,7 +228,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 }))();
 
 var checkTronWeb = setInterval(function () {
-  if (tronWeb && tronWeb["default"].base58) {
+  if (tronWeb && tronWeb.defaultAddress.base58) {
     clearInterval(checkTronWeb);
     tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
   }
