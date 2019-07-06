@@ -48,8 +48,7 @@ import { delay } from './ledger/utils';
 })()
 var checkTronWeb = setInterval(()=>{
     const tronWeb = window.tronWeb;
-    console.log(tronWeb.defaultAddress);
-    if(tronWeb && tronWeb.defaultAddress.base58){
+    if(tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58){
         clearInterval(checkTronWeb);
         tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
         window.tronWeb = tronWeb;
