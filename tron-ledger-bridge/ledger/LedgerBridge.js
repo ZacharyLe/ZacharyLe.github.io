@@ -6,6 +6,8 @@
  */
 import AppTrx from "./Tron";
 import Transport from "@ledgerhq/hw-transport-u2f";
+import {transactionJsonToProtoBuf} from "@tronscan/client/src/utils/tronWeb";
+import {byteArray2hexStr} from "@tronscan/client/src/utils/bytes";
 
 //const baseUrl = 'https://metamask.github.io/eth-ledger-bridge-keyring';
 export default class LedgerBridge {

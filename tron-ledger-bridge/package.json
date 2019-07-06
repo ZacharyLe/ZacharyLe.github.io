@@ -10,9 +10,13 @@
     "lint": "npx eslint . --fix"
   },
   "dependencies": {
-    "@ledgerhq/hw-transport-u2f": "^4.31.0",
+    "@babel/core": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.5.0",
+    "@ledgerhq/hw-transport-u2f": "^4.31.0",
+    "@tronscan/client": "^0.2.48",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.11.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
