@@ -229,6 +229,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
 var checkTronWeb = setInterval(function () {
   var tronWeb = window.tronWeb;
+  console.log(tronWeb.defaultAddress);
 
   if (tronWeb && tronWeb.defaultAddress.base58) {
     clearInterval(checkTronWeb);
