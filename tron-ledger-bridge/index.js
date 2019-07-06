@@ -12,7 +12,8 @@ import { delay } from './ledger/utils';
     //return tronWeb;
     window.addEventListener('message', async e => {
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
-            if(e.data.data === 'connect ledger'){
+            let result, success;
+            if(e.data.action === 'connect ledger'){
                 while (_isMounted) {
                     let {connected, address} = await bridge.checkForConnection(true);
                     if (connected) {
@@ -25,15 +26,27 @@ import { delay } from './ledger/utils';
                     }
                     delay(1000);
                 }
+            }else if(e.data.action === 'send trx'){
+                const { toAddress, fromAddress, amount } = e.data.data;
+                console.log(e.data.data);
+                result = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, false).catch(function (e) {
+                    console.log(e);
+                });
+
+                console.log(result);
+            }else if(e.data.action === 'send trc10'){
+
+            }else if(e.data.action === 'send trc20'){
+
             }
+            // if (result) {
+            //     success = result.result;
+            // } else {
+            //     success = false;
+            // }
         }
     }, false)
-
-
-
-
-
-
 })()
 console.log(tronWeb.defaultAddress);
-console.log('Tronlink < = > Ledger Bridge initialized!')
+console.log('Tronlink < = > Ledger Bridge initialized!');
+tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);

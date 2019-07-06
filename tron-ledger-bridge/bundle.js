@@ -87,51 +87,176 @@
 /******/ ({
 
 /***/ "./index.js":
-/*!******************************!*\
-  !*** ./index.js + 1 modules ***!
-  \******************************/
+/*!******************!*\
+  !*** ./index.js ***!
+  \******************/
 /*! no exports provided */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/asyncToGenerator.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/classCallCheck.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/createClass.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/helpers/objectSpread.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@babel/runtime/regenerator/index.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./ledger/Tron.js (<- Module uses injected variables (Buffer)) */
-/*! ModuleConcatenation bailout: Cannot concat with ./ledger/utils.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Module is an entry point */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ledger_LedgerBridge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ledger/LedgerBridge */ "./ledger/LedgerBridge.js");
+/* harmony import */ var _ledger_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ledger/utils */ "./ledger/utils.js");
+/* harmony import */ var _ledger_utils__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__("./node_modules/@babel/runtime/regenerator/index.js");
-var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__("./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/objectSpread.js
-var objectSpread = __webpack_require__("./node_modules/@babel/runtime/helpers/objectSpread.js");
-var objectSpread_default = /*#__PURE__*/__webpack_require__.n(objectSpread);
+/**
+ * Created by tron on 2019/7/4.
+ */
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__("./node_modules/@babel/runtime/helpers/classCallCheck.js");
-var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__("./node_modules/@babel/runtime/helpers/createClass.js");
-var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
-// EXTERNAL MODULE: ./ledger/Tron.js
-var Tron = __webpack_require__("./ledger/Tron.js");
+_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+  var _isMounted, bridge;
 
-// EXTERNAL MODULE: ./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js
-var TransportU2F = __webpack_require__("./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js");
-var TransportU2F_default = /*#__PURE__*/__webpack_require__.n(TransportU2F);
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _isMounted = true;
+          bridge = new _ledger_LedgerBridge__WEBPACK_IMPORTED_MODULE_2__["default"](); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
+          //return tronWeb;
 
-// CONCATENATED MODULE: ./ledger/LedgerBridge.js
+          window.addEventListener('message',
+          /*#__PURE__*/
+          function () {
+            var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount;
+
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
+                        _context.next = 27;
+                        break;
+                      }
+
+                      if (!(e.data.action === 'connect ledger')) {
+                        _context.next = 17;
+                        break;
+                      }
+
+                    case 2:
+                      if (!_isMounted) {
+                        _context.next = 15;
+                        break;
+                      }
+
+                      _context.next = 5;
+                      return bridge.checkForConnection(true);
+
+                    case 5:
+                      _ref3 = _context.sent;
+                      connected = _ref3.connected;
+                      address = _ref3.address;
+
+                      if (!connected) {
+                        _context.next = 12;
+                        break;
+                      }
+
+                      _isMounted = false;
+                      bridge.sendMessageToExtension({
+                        connected: connected,
+                        address: address
+                      });
+                      return _context.abrupt("break", 15);
+
+                    case 12:
+                      Object(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
+                      _context.next = 2;
+                      break;
+
+                    case 15:
+                      _context.next = 27;
+                      break;
+
+                    case 17:
+                      if (!(e.data.action === 'send trx')) {
+                        _context.next = 26;
+                        break;
+                      }
+
+                      _e$data$data = e.data.data, toAddress = _e$data$data.toAddress, fromAddress = _e$data$data.fromAddress, amount = _e$data$data.amount;
+                      console.log(e.data.data);
+                      _context.next = 22;
+                      return tronWeb.trx.sendTransaction(toAddress, amount, {
+                        address: fromAddress
+                      }, false)["catch"](function (e) {
+                        console.log(e);
+                      });
+
+                    case 22:
+                      result = _context.sent;
+                      console.log(result);
+                      _context.next = 27;
+                      break;
+
+                    case 26:
+                      if (e.data.action === 'send trc10') {} else if (e.data.action === 'send trc20') {}
+
+                    case 27:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+
+            return function (_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }(), false);
+
+        case 3:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _callee2);
+}))();
+
+console.log(tronWeb.defaultAddress);
+console.log('Tronlink < = > Ledger Bridge initialized!');
+tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+
+/***/ }),
+
+/***/ "./ledger/LedgerBridge.js":
+/*!********************************!*\
+  !*** ./ledger/LedgerBridge.js ***!
+  \********************************/
+/*! exports provided: default */
+/*! ModuleConcatenation bailout: Module uses injected variables (Buffer) */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LedgerBridge; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread */ "./node_modules/@babel/runtime/helpers/objectSpread.js");
+/* harmony import */ var _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Tron__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Tron */ "./ledger/Tron.js");
+/* harmony import */ var _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ledgerhq/hw-transport-u2f */ "./node_modules/@ledgerhq/hw-transport-u2f/lib/TransportU2F.js");
+/* harmony import */ var _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -148,20 +273,20 @@ var TransportU2F_default = /*#__PURE__*/__webpack_require__.n(TransportU2F);
 
  //const baseUrl = 'https://metamask.github.io/eth-ledger-bridge-keyring';
 
-var LedgerBridge_LedgerBridge =
+var LedgerBridge =
 /*#__PURE__*/
 function () {
   function LedgerBridge() {
-    classCallCheck_default()(this, LedgerBridge);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3___default()(this, LedgerBridge);
 
     this.transport = null;
     this.path = "44'/195'/0'/0/0";
   }
 
-  createClass_default()(LedgerBridge, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default()(LedgerBridge, [{
     key: "sendMessageToExtension",
     value: function sendMessageToExtension(msg) {
-      window.parent.postMessage(objectSpread_default()({
+      window.parent.postMessage(_babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_2___default()({
         target: 'LEDGER-IFRAME',
         success: true
       }, msg), '*');
@@ -174,14 +299,14 @@ function () {
   }, {
     key: "checkForConnection",
     value: function () {
-      var _checkForConnection = asyncToGenerator_default()(
+      var _checkForConnection = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee2() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var _this = this;
 
         var confirm,
             _args2 = arguments;
-        return regenerator_default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
@@ -189,22 +314,22 @@ function () {
                 return _context2.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref = asyncToGenerator_default()(
+                  var _ref = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee(resolve, reject) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(resolve, reject) {
                     var transport, trx, _ref2, address;
 
-                    return regenerator_default.a.wrap(function _callee$(_context) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:
                             _context.next = 2;
-                            return TransportU2F_default.a.create();
+                            return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
 
                           case 2:
                             transport = _context.sent;
                             _context.prev = 3;
-                            trx = new Tron["default"](transport);
+                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](transport);
                             _context.next = 7;
                             return trx.getAddress(_this.path, confirm);
 
@@ -261,11 +386,11 @@ function () {
   }, {
     key: "unlock",
     value: function () {
-      var _unlock = asyncToGenerator_default()(
+      var _unlock = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee3(replyAction, hdPath) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(replyAction, hdPath) {
         var res, e;
-        return regenerator_default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
@@ -321,34 +446,34 @@ function () {
   }, {
     key: "getAddress",
     value: function () {
-      var _getAddress = asyncToGenerator_default()(
+      var _getAddress = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee5() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         var _this2 = this;
 
-        return regenerator_default.a.wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 return _context5.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref3 = asyncToGenerator_default()(
+                  var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee4(resolve, reject) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(resolve, reject) {
                     var transport, trx, _ref4, address;
 
-                    return regenerator_default.a.wrap(function _callee4$(_context4) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
                       while (1) {
                         switch (_context4.prev = _context4.next) {
                           case 0:
                             _context4.next = 2;
-                            return TransportU2F_default.a.create();
+                            return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
 
                           case 2:
                             transport = _context4.sent;
                             _context4.prev = 3;
-                            trx = new Tron["default"](transport);
+                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](transport);
                             _context4.next = 7;
                             return trx.getAddress(_this2.path);
 
@@ -399,33 +524,33 @@ function () {
   }, {
     key: "signTransaction",
     value: function () {
-      var _signTransaction = asyncToGenerator_default()(
+      var _signTransaction = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
-      regenerator_default.a.mark(function _callee7(transaction) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(transaction) {
         var _this3 = this;
 
-        return regenerator_default.a.wrap(function _callee7$(_context7) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
                 return _context7.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref5 = asyncToGenerator_default()(
+                  var _ref5 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
-                  regenerator_default.a.mark(function _callee6(resolve, reject) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(resolve, reject) {
                     var transport, trx, response;
-                    return regenerator_default.a.wrap(function _callee6$(_context6) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
                       while (1) {
                         switch (_context6.prev = _context6.next) {
                           case 0:
                             _context6.next = 2;
-                            return TransportU2F_default.a.create();
+                            return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
 
                           case 2:
                             transport = _context6.sent;
                             _context6.prev = 3;
-                            trx = new Tron["default"](transport);
+                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](transport);
                             _context6.next = 7;
                             return trx.signTransactionWithTokenName(_this3.path, transaction.hex, transaction.info);
 
@@ -472,114 +597,158 @@ function () {
 
       return signTransaction;
     }()
+  }, {
+    key: "buildTransactionSigner",
+    value: function buildTransactionSigner(tronWeb) {
+      var _this4 = this;
+
+      return (
+        /*#__PURE__*/
+        function () {
+          var _ref6 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(transaction) {
+            var transactionObj, rawDataHex, raw, contractObj, contractType, tokenInfo, extra, ID, token1, token2, exchangeDepositID, exchangeDeposit, exchangeDepositToken, exchangeWithdrawID, exchangeWithdraw, exchangeWithdrawToken, exchangeID, exchange, signedResponse;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    _context8.prev = 0;
+                    transactionObj = transactionJsonToProtoBuf(transaction);
+                    rawDataHex = byteArray2hexStr(transactionObj.getRawData().serializeBinary());
+                    raw = transactionObj.getRawData();
+                    contractObj = raw.getContractList()[0];
+                    contractType = contractObj.getType();
+                    tokenInfo = [];
+                    extra = {};
+                    _context8.t0 = contractType;
+                    _context8.next = _context8.t0 === 2 ? 11 : _context8.t0 === 41 ? 17 : _context8.t0 === 42 ? 25 : _context8.t0 === 43 ? 31 : _context8.t0 === 44 ? 37 : _context8.t0 === 31 ? 42 : 44;
+                    break;
+
+                  case 11:
+                    // Transfer Assets
+                    ID = tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.asset_name); // get token info
+
+                    _context8.next = 14;
+                    return _this4.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.asset_name);
+
+                  case 14:
+                    extra = _context8.sent;
+                    tokenInfo.push(_this4.getLedgerTokenInfo(ID).message);
+                    return _context8.abrupt("break", 44);
+
+                  case 17:
+                    _context8.next = 19;
+                    return _this4.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.first_token_id);
+
+                  case 19:
+                    token1 = _context8.sent;
+                    _context8.next = 22;
+                    return _this4.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.second_token_id);
+
+                  case 22:
+                    token2 = _context8.sent;
+
+                    if (token1 !== undefined && token2 !== undefined) {
+                      extra = {
+                        token1: token1.token_name,
+                        decimals1: token1.decimals,
+                        token2: token2.token_name,
+                        decimals2: token2.decimals
+                      };
+                      if (token1.id != 0) tokenInfo.push(_this4.getLedgerTokenInfo(token1.id).message);
+                      if (token2.id != 0) tokenInfo.push(_this4.getLedgerTokenInfo(token2.id).message);
+                    }
+
+                    return _context8.abrupt("break", 44);
+
+                  case 25:
+                    //ExchangeInjectContract
+                    exchangeDepositID = transaction.raw_data.contract[0].parameter.value.exchange_id;
+                    exchangeDeposit = _this4.getLedgerExchangeInfo(exchangeDepositID);
+                    exchangeDepositToken = _this4.getLedgerTokenInfo(tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.token_id)); // get exchange info
+
+                    extra = {
+                      pair: exchangeDeposit.pair,
+                      token: exchangeDepositToken.token_name,
+                      decimals: exchangeDepositToken.decimals
+                    };
+                    if (exchangeDepositToken.id != 0) tokenInfo.push(exchangeDepositToken.message);
+                    return _context8.abrupt("break", 44);
+
+                  case 31:
+                    //ExchangeWithdrawContract
+                    exchangeWithdrawID = transaction.raw_data.contract[0].parameter.value.exchange_id;
+                    exchangeWithdraw = _this4.getLedgerExchangeInfo(exchangeWithdrawID);
+                    exchangeWithdrawToken = _this4.getLedgerTokenInfo(tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.token_id)); // get exchange info
+
+                    extra = {
+                      pair: exchangeWithdraw.pair,
+                      token: exchangeWithdrawToken.token_name,
+                      decimals: exchangeWithdrawToken.decimals
+                    };
+                    if (exchangeWithdrawToken.id != 0) tokenInfo.push(exchangeWithdrawToken.message);
+                    return _context8.abrupt("break", 44);
+
+                  case 37:
+                    //ExchangeTransactionContract
+                    exchangeID = transaction.raw_data.contract[0].parameter.value.exchange_id;
+                    exchange = _this4.getLedgerExchangeInfo(exchangeID); // get exchange info
+
+                    extra = {
+                      pair: exchange.pair,
+                      decimals1: exchange.decimals1,
+                      decimals2: exchange.decimals2,
+                      action: transaction.raw_data.contract[0].parameter.value.token_id === exchange.firstToken ? "Sell" : "Buy"
+                    };
+                    tokenInfo.push(exchange.message);
+                    return _context8.abrupt("break", 44);
+
+                  case 42:
+                    //Trigger Smart Contract
+                    extra = transaction.extra;
+                    return _context8.abrupt("break", 44);
+
+                  case 44:
+                    extra.hash = transaction.txID; //const ledgerBridge = new LedgerBridge();
+
+                    _context8.next = 47;
+                    return _this4.signTransaction({
+                      hex: rawDataHex,
+                      info: tokenInfo
+                    });
+
+                  case 47:
+                    signedResponse = _context8.sent;
+                    transaction.signature = [Buffer.from(signedResponse).toString('hex')];
+                    return _context8.abrupt("return", transaction);
+
+                  case 52:
+                    _context8.prev = 52;
+                    _context8.t1 = _context8["catch"](0);
+                    console.log(_context8.t1);
+
+                  case 55:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee8, null, [[0, 52]]);
+          }));
+
+          return function (_x10) {
+            return _ref6.apply(this, arguments);
+          };
+        }()
+      );
+    }
   }]);
 
   return LedgerBridge;
 }();
 
 
-// EXTERNAL MODULE: ./ledger/utils.js
-var utils = __webpack_require__("./ledger/utils.js");
-
-// CONCATENATED MODULE: ./index.js
-
-
-
-/**
- * Created by tron on 2019/7/4.
- */
-
-
-
-asyncToGenerator_default()(
-/*#__PURE__*/
-regenerator_default.a.mark(function _callee2() {
-  var _isMounted, bridge;
-
-  return regenerator_default.a.wrap(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _isMounted = true;
-          bridge = new LedgerBridge_LedgerBridge(); //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
-          //return tronWeb;
-
-          window.addEventListener('message',
-          /*#__PURE__*/
-          function () {
-            var _ref2 = asyncToGenerator_default()(
-            /*#__PURE__*/
-            regenerator_default.a.mark(function _callee(e) {
-              var _ref3, connected, address;
-
-              return regenerator_default.a.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
-                        _context.next = 15;
-                        break;
-                      }
-
-                      if (!(e.data.data === 'connect ledger')) {
-                        _context.next = 15;
-                        break;
-                      }
-
-                    case 2:
-                      if (!_isMounted) {
-                        _context.next = 15;
-                        break;
-                      }
-
-                      _context.next = 5;
-                      return bridge.checkForConnection(true);
-
-                    case 5:
-                      _ref3 = _context.sent;
-                      connected = _ref3.connected;
-                      address = _ref3.address;
-
-                      if (!connected) {
-                        _context.next = 12;
-                        break;
-                      }
-
-                      _isMounted = false;
-                      bridge.sendMessageToExtension({
-                        connected: connected,
-                        address: address
-                      });
-                      return _context.abrupt("break", 15);
-
-                    case 12:
-                      Object(utils["delay"])(1000);
-                      _context.next = 2;
-                      break;
-
-                    case 15:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee);
-            }));
-
-            return function (_x) {
-              return _ref2.apply(this, arguments);
-            };
-          }(), false);
-
-        case 3:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, _callee2);
-}))();
-
-console.log(tronWeb.defaultAddress);
-console.log('Tronlink < = > Ledger Bridge initialized!');
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/buffer/index.js */ "./node_modules/buffer/index.js").Buffer))
 
 /***/ }),
 
