@@ -7,6 +7,13 @@ import { delay } from './ledger/utils';
 (async () => {
     let _isMounted = true;
     const bridge = new LedgerBridge();
+// if (typeof window.tronWeb === 'undefined') {
+    console.log(tronWeb.defaultAddress);
+
+
+    tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
+
+return tronWeb;
     window.addEventListener('message', async e => {
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
             if(e.data.data === 'connect ledger'){
