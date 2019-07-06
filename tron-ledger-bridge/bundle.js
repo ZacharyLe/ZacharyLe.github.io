@@ -220,17 +220,28 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             };
           }(), false);
 
-          while (!_isTronWeb) {
-            if (window.tronWeb && window.defaultAddress) {
-              _isTronWeb = true;
-              tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-              console.log(tronWeb.defaultAddress);
-            }
-
-            Object(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
+        case 4:
+          if (_isTronWeb) {
+            _context2.next = 13;
+            break;
           }
 
-        case 5:
+          if (!(window.tronWeb && window.defaultAddress)) {
+            _context2.next = 10;
+            break;
+          }
+
+          _isTronWeb = true;
+          tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+          console.log(tronWeb.defaultAddress);
+          return _context2.abrupt("break", 13);
+
+        case 10:
+          Object(_ledger_utils__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
+          _context2.next = 4;
+          break;
+
+        case 13:
         case "end":
           return _context2.stop();
       }

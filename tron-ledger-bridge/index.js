@@ -51,6 +51,7 @@ import { delay } from './ledger/utils';
             _isTronWeb = true;
             tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
             console.log(tronWeb.defaultAddress);
+            break;
         }
         delay(1000);
     }
