@@ -8,9 +8,8 @@ import AppTrx from "./Tron";
 import Transport from "@ledgerhq/hw-transport-u2f";
 import {transactionJsonToProtoBuf} from "@tronscan/client/src/utils/tronWeb";
 import {byteArray2hexStr} from "@tronscan/client/src/utils/bytes";
-import { Client as ApiClient } from "@tronscan/client";
 const ledgerTokenList = require('./tokens');
-const Client = new ApiClient();
+
 //const baseUrl = 'https://metamask.github.io/eth-ledger-bridge-keyring';
 export default class LedgerBridge {
     constructor() {
@@ -114,12 +113,8 @@ export default class LedgerBridge {
             else
                 tokenID = parseInt(tokenID);
         }
-
-        const token = await Client.getTokens({id: tokenID});
-        if (token.total==1){
-            return {id: tokenID, decimals: token.tokens[0].precision, token_name: token.tokens[0].name};
-        }
-        return {id: -1, decimals: 0, token_name: ""};;
+        const { id, precision, name } = await tronWeb.trx.getTokenByID(tokenID);
+        return {id, decimals: precision, token_name: name};
     }
 
     getLedgerTokenInfo(ID){
