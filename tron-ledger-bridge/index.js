@@ -1,6 +1,7 @@
 /**
  * Created by tron on 2019/7/4.
  */
+import BigNumber from "bignumber.js";
 import LedgerBridge from './ledger/LedgerBridge'
 import { delay } from './ledger/utils';
 let bridge = new LedgerBridge();
@@ -37,7 +38,35 @@ let bridge = new LedgerBridge();
                     success:result
                 });
             }else if(e.data.action === 'send trc20'){
-
+                const { id, toAddress, fromAddress, amount, decimals, TokenName} = e.data.data;
+                let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
+                    tronWeb.address.toHex(id),
+                    'transfer(address,uint256)',
+                    10000000, 0,
+                    [
+                        { type: 'address', value: tronWeb.address.toHex(toAddress)},
+                        { type: 'uint256', value: amount}
+                    ],
+                    tronWeb.address.toHex(fromAddress)
+                );
+                if (unSignTransaction.transaction !== undefined) {
+                    unSignTransaction = unSignTransaction.transaction;
+                    unSignTransaction.extra = {
+                        to: toAddress,
+                        decimals: decimals,
+                        token_name: TokenName,
+                        amount: amount
+                    };
+                    const signedTransaction = await tronWeb.trx.sign(unSignTransaction, false).catch(e => false);
+                    if (signedTransaction) {
+                        const broadcast = await tronWeb.trx.sendRawTransaction(signedTransaction);
+                        if (broadcast.result) {
+                            bridge.sendMessageToExtension({
+                                success:true
+                            });
+                        }
+                    }
+                }
             }
         }
     }, false);
