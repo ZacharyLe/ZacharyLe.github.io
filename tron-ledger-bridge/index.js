@@ -30,9 +30,12 @@ let bridge = new LedgerBridge();
                 bridge.sendMessageToExtension({
                     success:result
                 });
-                console.log(result);
             }else if(e.data.action === 'send trc10'){
-
+                const { id, toAddress, fromAddress, amount } = e.data.data;
+                const result = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, false).catch(e=>({result:false}));
+                bridge.sendMessageToExtension({
+                    success:result
+                });
             }else if(e.data.action === 'send trc20'){
 
             }

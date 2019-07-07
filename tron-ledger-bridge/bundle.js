@@ -131,14 +131,14 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
             /*#__PURE__*/
             _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount, _ref4, _result;
+              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount, _ref4, _result, _e$data$data2, id, _toAddress, _fromAddress, _amount, _result2;
 
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
                       if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
-                        _context.next = 28;
+                        _context.next = 35;
                         break;
                       }
 
@@ -179,12 +179,12 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       break;
 
                     case 15:
-                      _context.next = 28;
+                      _context.next = 35;
                       break;
 
                     case 17:
                       if (!(e.data.action === 'send trx')) {
-                        _context.next = 27;
+                        _context.next = 26;
                         break;
                       }
 
@@ -204,14 +204,37 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       bridge.sendMessageToExtension({
                         success: _result
                       });
-                      console.log(_result);
-                      _context.next = 28;
+                      _context.next = 35;
                       break;
 
-                    case 27:
-                      if (e.data.action === 'send trc10') {} else if (e.data.action === 'send trc20') {}
+                    case 26:
+                      if (!(e.data.action === 'send trc10')) {
+                        _context.next = 34;
+                        break;
+                      }
 
-                    case 28:
+                      _e$data$data2 = e.data.data, id = _e$data$data2.id, _toAddress = _e$data$data2.toAddress, _fromAddress = _e$data$data2.fromAddress, _amount = _e$data$data2.amount;
+                      _context.next = 30;
+                      return tronWeb.trx.sendToken(_toAddress, _amount, id, {
+                        address: _fromAddress
+                      }, false)["catch"](function (e) {
+                        return {
+                          result: false
+                        };
+                      });
+
+                    case 30:
+                      _result2 = _context.sent;
+                      bridge.sendMessageToExtension({
+                        success: _result2
+                      });
+                      _context.next = 35;
+                      break;
+
+                    case 34:
+                      if (e.data.action === 'send trc20') {}
+
+                    case 35:
                     case "end":
                       return _context.stop();
                   }
