@@ -26,26 +26,20 @@ let bridge = new LedgerBridge();
                 }
             }else if(e.data.action === 'send trx'){
                 const { toAddress, fromAddress, amount } = e.data.data;
-                console.log(e.data.data);
-                result = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, false).catch(function (e) {
-                    console.log(e);
+                const { result } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, false).catch(e=>({result:false}));
+                bridge.sendMessageToExtension({
+                    success:result
                 });
-
                 console.log(result);
             }else if(e.data.action === 'send trc10'){
 
             }else if(e.data.action === 'send trc20'){
 
             }
-            // if (result) {
-            //     success = result.result;
-            // } else {
-            //     success = false;
-            // }
         }
     }, false);
 })()
-const checkTronWeb = setInterval(()=>{
+const checkTronWeb = setInterval(async ()=>{
     const tronWeb = window.tronWeb;
     if(tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58){
         clearInterval(checkTronWeb);

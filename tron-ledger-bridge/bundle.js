@@ -131,14 +131,14 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
             /*#__PURE__*/
             _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount;
+              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount, _ref4, _result;
 
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
                       if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
-                        _context.next = 27;
+                        _context.next = 28;
                         break;
                       }
 
@@ -179,34 +179,39 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       break;
 
                     case 15:
-                      _context.next = 27;
+                      _context.next = 28;
                       break;
 
                     case 17:
                       if (!(e.data.action === 'send trx')) {
-                        _context.next = 26;
+                        _context.next = 27;
                         break;
                       }
 
                       _e$data$data = e.data.data, toAddress = _e$data$data.toAddress, fromAddress = _e$data$data.fromAddress, amount = _e$data$data.amount;
-                      console.log(e.data.data);
-                      _context.next = 22;
+                      _context.next = 21;
                       return tronWeb.trx.sendTransaction(toAddress, amount, {
                         address: fromAddress
                       }, false)["catch"](function (e) {
-                        console.log(e);
+                        return {
+                          result: false
+                        };
                       });
 
-                    case 22:
-                      result = _context.sent;
-                      console.log(result);
-                      _context.next = 27;
+                    case 21:
+                      _ref4 = _context.sent;
+                      _result = _ref4.result;
+                      bridge.sendMessageToExtension({
+                        success: _result
+                      });
+                      console.log(_result);
+                      _context.next = 28;
                       break;
 
-                    case 26:
+                    case 27:
                       if (e.data.action === 'send trc10') {} else if (e.data.action === 'send trc20') {}
 
-                    case 27:
+                    case 28:
                     case "end":
                       return _context.stop();
                   }
@@ -227,15 +232,31 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
   }, _callee2);
 }))();
 
-var checkTronWeb = setInterval(function () {
-  var tronWeb = window.tronWeb;
+var checkTronWeb = setInterval(
+/*#__PURE__*/
+_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+  var tronWeb;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          tronWeb = window.tronWeb;
 
-  if (tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58) {
-    clearInterval(checkTronWeb);
-    tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
-    window.tronWeb = tronWeb;
-  }
-}, 1000);
+          if (tronWeb && tronWeb.defaultAddress && tronWeb.defaultAddress.base58) {
+            clearInterval(checkTronWeb);
+            tronWeb.trx.sign = bridge.buildTransactionSigner(tronWeb);
+            window.tronWeb = tronWeb;
+          }
+
+        case 2:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
+})), 1000);
 console.log('Tronlink < = > Ledger Bridge initialized!');
 
 /***/ }),
