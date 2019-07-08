@@ -1,7 +1,6 @@
 /**
  * Created by tron on 2019/7/4.
  */
-import BigNumber from "bignumber.js";
 import LedgerBridge from './ledger/LedgerBridge'
 import { delay } from './ledger/utils';
 let bridge = new LedgerBridge();

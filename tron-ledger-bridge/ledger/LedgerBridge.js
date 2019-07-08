@@ -177,6 +177,7 @@ export default class LedgerBridge {
                     transaction.signature = [Buffer.from(signedResponse).toString('hex')];
                     return transaction;
                 } catch (error){
+                    console.log(error);
                     return error;
                 }
         };
