@@ -178,7 +178,7 @@ export default class LedgerBridge {
                     return transaction;
                 } catch (error){
                     console.log(error);
-                    return error;
+                    throw new Error(error);
                 }
         };
     }
