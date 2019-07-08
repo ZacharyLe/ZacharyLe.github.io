@@ -195,9 +195,10 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       _context.next = 21;
                       return tronWeb.trx.sendTransaction(toAddress, amount, {
                         address: fromAddress
-                      }, false)["catch"](function (e) {
+                      }, false)["catch"](function (error) {
                         return {
-                          result: false
+                          result: false,
+                          error: error
                         };
                       });
 
