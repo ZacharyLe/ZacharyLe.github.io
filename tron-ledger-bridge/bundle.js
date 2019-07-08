@@ -134,7 +134,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
             /*#__PURE__*/
             _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount, _ref4, _result, _e$data$data2, id, _toAddress, _fromAddress, _amount, _result2, _e$data$data3, _id, _toAddress2, _fromAddress2, _amount2, decimals, TokenName, unSignTransaction, signedTransaction, broadcast;
+              var result, success, _ref3, connected, address, _e$data$data, toAddress, fromAddress, amount, _result, _e$data$data2, id, _toAddress, _fromAddress, _amount, _result2, _e$data$data3, _id, _toAddress2, _fromAddress2, _amount2, decimals, TokenName, unSignTransaction, signedTransaction, broadcast;
 
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                 while (1) {
@@ -202,10 +202,10 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       });
 
                     case 21:
-                      _ref4 = _context.sent;
-                      _result = _ref4.result;
+                      _result = _context.sent;
+                      console.log(_result);
                       bridge.sendMessageToExtension({
-                        success: _result
+                        success: _result.result
                       });
                       _context.next = 50;
                       break;
@@ -854,7 +854,7 @@ function () {
                   case 28:
                     _context9.prev = 28;
                     _context9.t1 = _context9["catch"](0);
-                    console.log(_context9.t1);
+                    return _context9.abrupt("return", _context9.t1);
 
                   case 31:
                   case "end":
