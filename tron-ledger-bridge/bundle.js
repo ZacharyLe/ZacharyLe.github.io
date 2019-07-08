@@ -816,52 +816,53 @@ function () {
                     contractType = contractObj.getType();
                     tokenInfo = [];
                     extra = {};
+                    console.log('contractType', contractType);
                     _context9.t0 = contractType;
-                    _context9.next = _context9.t0 === 2 ? 11 : _context9.t0 === 31 ? 17 : 19;
+                    _context9.next = _context9.t0 === 2 ? 12 : _context9.t0 === 31 ? 18 : 20;
                     break;
 
-                  case 11:
+                  case 12:
                     // Transfer Assets
                     ID = tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.asset_name); // get token info
 
-                    _context9.next = 14;
+                    _context9.next = 15;
                     return _this4.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.asset_name);
 
-                  case 14:
+                  case 15:
                     extra = _context9.sent;
                     tokenInfo.push(_this4.getLedgerTokenInfo(ID).message);
-                    return _context9.abrupt("break", 19);
+                    return _context9.abrupt("break", 20);
 
-                  case 17:
+                  case 18:
                     //Trigger Smart Contract
                     extra = transaction.extra;
-                    return _context9.abrupt("break", 19);
+                    return _context9.abrupt("break", 20);
 
-                  case 19:
+                  case 20:
                     extra.hash = transaction.txID; //const ledgerBridge = new LedgerBridge();
 
-                    _context9.next = 22;
+                    _context9.next = 23;
                     return _this4.signTransaction({
                       hex: rawDataHex,
                       info: tokenInfo
                     });
 
-                  case 22:
+                  case 23:
                     signedResponse = _context9.sent;
                     transaction.signature = [Buffer.from(signedResponse).toString('hex')];
                     return _context9.abrupt("return", transaction);
 
-                  case 27:
-                    _context9.prev = 27;
+                  case 28:
+                    _context9.prev = 28;
                     _context9.t1 = _context9["catch"](0);
                     console.log(_context9.t1);
 
-                  case 30:
+                  case 31:
                   case "end":
                     return _context9.stop();
                 }
               }
-            }, _callee9, null, [[0, 27]]);
+            }, _callee9, null, [[0, 28]]);
           }));
 
           return function (_x11) {
