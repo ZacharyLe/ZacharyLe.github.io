@@ -26,17 +26,12 @@ let bridge = new LedgerBridge();
                 }
             }else if(e.data.action === 'send trx'){
                 const { toAddress, fromAddress, amount } = e.data.data;
-                const result = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, false).catch(error=>({result:false,error}));
-                console.log(result);
-                bridge.sendMessageToExtension({
-                    success:result.result
-                });
+                const { result, error = '' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, false).catch(error=>({result:false,error}));
+                bridge.sendMessageToExtension({success:result,error});
             }else if(e.data.action === 'send trc10'){
                 const { id, toAddress, fromAddress, amount } = e.data.data;
-                const result = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, false).catch(e=>({result:false}));
-                bridge.sendMessageToExtension({
-                    success:result
-                });
+                const { result, error = '' } = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, false).catch(e=>({result:false}));
+                bridge.sendMessageToExtension({success:result,error});
             }else if(e.data.action === 'send trc20'){
                 const { id, toAddress, fromAddress, amount, decimals, TokenName} = e.data.data;
                 let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
@@ -63,6 +58,10 @@ let bridge = new LedgerBridge();
                         if (broadcast.result) {
                             bridge.sendMessageToExtension({
                                 success:true
+                            });
+                        }else{
+                            bridge.sendMessageToExtension({
+                                success:false
                             });
                         }
                     }
