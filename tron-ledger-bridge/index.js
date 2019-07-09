@@ -26,13 +26,12 @@ let bridge = new LedgerBridge();
                 }
             }else if(e.data.action === 'send trx'){
                 const { toAddress, fromAddress, amount } = e.data.data;
-                const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, (error)=>({result:false,error}));
-                console.log({result, error});
-                //bridge.sendMessageToExtension({success:result,error});
+                const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:false,error}));
+                bridge.sendMessageToExtension({success:result,error});
             }else if(e.data.action === 'send trc10'){
                 const { id, toAddress, fromAddress, amount } = e.data.data;
-                const result = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, false).catch(e=>({result:false}));
-                result.result && bridge.sendMessageToExtension({success:result,error});
+                const { result, error='' } = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, error=>({result:false,error}));
+                bridge.sendMessageToExtension({success:result,error});
             }else if(e.data.action === 'send trc20'){
                 const { id, toAddress, fromAddress, amount, decimals, TokenName} = e.data.data;
                 let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
@@ -53,16 +52,17 @@ let bridge = new LedgerBridge();
                         token_name: TokenName,
                         amount: amount
                     };
-                    const signedTransaction = await tronWeb.trx.sign(unSignTransaction, false).catch(e => false);
-                    if (signedTransaction) {
+                    const signedTransaction = await tronWeb.trx.sign(unSignTransaction, false).catch(error=>({result:false,error}));
+                    if (signedTransaction.hasOwnProperty('result') && !signedTransaction.result) {
+                        bridge.sendMessageToExtension({
+                            success:false,
+                            error:signedTransaction.error
+                        });
+                    }else{
                         const broadcast = await tronWeb.trx.sendRawTransaction(signedTransaction);
                         if (broadcast.result) {
                             bridge.sendMessageToExtension({
-                                success:true
-                            });
-                        }else{
-                            bridge.sendMessageToExtension({
-                                success:false
+                                success: true
                             });
                         }
                     }
