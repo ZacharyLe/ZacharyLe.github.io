@@ -864,7 +864,7 @@ function () {
                     _context9.prev = 28;
                     _context9.t1 = _context9["catch"](0);
                     console.log(_context9.t1);
-                    return _context9.abrupt("return", _context9.t1.message);
+                    throw new Error(_context9.t1.message);
 
                   case 32:
                   case "end":
