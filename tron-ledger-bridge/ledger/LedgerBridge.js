@@ -150,9 +150,7 @@ export default class LedgerBridge {
                     console.log('contractType',contractType);
                     switch (contractType){
                         case 2: // Transfer Assets
-                            const ID = tronWeb.toUtf8(
-                                transaction.raw_data.contract[0].parameter.value.asset_name
-                            );
+                            const ID = tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.asset_name);
                             // get token info
                             extra = await this.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.asset_name);
                             tokenInfo.push(this.getLedgerTokenInfo(ID).message);
@@ -178,7 +176,7 @@ export default class LedgerBridge {
                     return transaction;
                 } catch (error){
                     console.log(error.message);
-                    throw new Error(error.message);
+                    throw error.message;
                 }
         };
     }
