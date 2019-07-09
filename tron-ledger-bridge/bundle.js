@@ -194,7 +194,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         address: fromAddress
                       }, function (error) {
                         return {
-                          result: false,
+                          result: error ? false : true,
                           error: error
                         };
                       });
@@ -224,7 +224,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         address: _fromAddress
                       }, function (error) {
                         return {
-                          result: false,
+                          result: error ? false : true,
                           error: error
                         };
                       });
@@ -275,7 +275,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       _context.next = 50;
                       return tronWeb.trx.sign(unSignTransaction, false)["catch"](function (error) {
                         return {
-                          result: false,
+                          result: error ? false : true,
                           error: error
                         };
                       });
