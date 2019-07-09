@@ -192,13 +192,18 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       _context.next = 21;
                       return tronWeb.trx.sendTransaction(toAddress, amount, {
                         address: fromAddress
-                      }, false);
+                      }, false)["catch"](function (error) {
+                        return {
+                          result: false,
+                          error: error
+                        };
+                      });
 
                     case 21:
                       _result = _context.sent;
                       console.log(_result);
                       bridge.sendMessageToExtension({
-                        success: _result.result,
+                        success: _result,
                         error: error
                       });
                       _context.next = 53;
