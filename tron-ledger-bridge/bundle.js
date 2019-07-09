@@ -204,10 +204,11 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       _result = _ref4.result;
                       _ref4$error = _ref4.error;
                       _error = _ref4$error === void 0 ? '' : _ref4$error;
-                      bridge.sendMessageToExtension({
-                        success: _result,
+                      console.log({
+                        result: _result,
                         error: _error
-                      });
+                      }); //bridge.sendMessageToExtension({success:result,error});
+
                       _context.next = 52;
                       break;
 
