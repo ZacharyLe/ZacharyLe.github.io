@@ -474,30 +474,31 @@ function () {
                               address: address,
                               connected: true
                             });
-                            _context.next = 15;
+                            _context.next = 16;
                             break;
 
                           case 12:
                             _context.prev = 12;
                             _context.t0 = _context["catch"](3);
+                            console.log(_context.t0);
                             resolve({
                               address: false,
                               connected: false
                             });
 
-                          case 15:
-                            _context.prev = 15;
+                          case 16:
+                            _context.prev = 16;
 
                             _this.transport.close();
 
-                            return _context.finish(15);
+                            return _context.finish(16);
 
-                          case 18:
+                          case 19:
                           case "end":
                             return _context.stop();
                         }
                       }
-                    }, _callee, null, [[3, 12, 15, 18]]);
+                    }, _callee, null, [[3, 12, 16, 19]]);
                   }));
 
                   return function (_x, _x2) {

@@ -36,6 +36,7 @@ export default class LedgerBridge {
                         connected: true,
                     });
                 } catch(e) {
+                    console.log(e);
                     resolve({
                         address: false,
                         connected: false,
