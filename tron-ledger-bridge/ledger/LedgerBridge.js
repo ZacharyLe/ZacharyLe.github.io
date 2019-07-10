@@ -22,14 +22,14 @@ export default class LedgerBridge {
     }
 
     cleanUp () {
-        this.transport.close()
+        this.transport.close();
     }
 
     async checkForConnection(confirm = false) {
         return new Promise(async (resolve, reject) => {
-                const transport = await Transport.create();
+                this.transport = await Transport.create();
                 try {
-                    const trx = new AppTrx(transport);
+                    const trx = new AppTrx(this.transport);
                     let {address} = await trx.getAddress(this.path, confirm);
                     resolve({
                         address,
@@ -41,7 +41,7 @@ export default class LedgerBridge {
                         connected: false,
                     });
                 } finally {
-                    transport.close();
+                    this.transport.close();
                 }
         });
     }
@@ -73,24 +73,24 @@ export default class LedgerBridge {
 
     async getAddress() {
         return new Promise(async (resolve, reject) => {
-            const transport = await Transport.create();
+            this.transport = await Transport.create();
             try {
-                const trx = new AppTrx(transport);
+                const trx = new AppTrx(this.transport);
                 let {address} = await trx.getAddress(this.path);
                 resolve(address);
             } catch(e) {
                 reject(e);
             } finally {
-                transport.close();
+                this.transport.close();
             }
         });
     }
 
     async signTransaction(transaction) {
         return new Promise(async (resolve, reject) => {
-            const transport = await Transport.create();
+            this.transport = await Transport.create();
             try {
-                const trx = new AppTrx(transport);
+                const trx = new AppTrx(this.transport);
                 let response = await trx.signTransactionWithTokenName(
                     this.path,
                     transaction.hex,
@@ -99,7 +99,7 @@ export default class LedgerBridge {
             } catch(e) {
                 reject(e);
             } finally {
-                transport.close();
+                this.transport.close();
             }
         });
     }
