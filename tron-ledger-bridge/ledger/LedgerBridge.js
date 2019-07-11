@@ -79,7 +79,7 @@ export default class LedgerBridge {
 
     async getAddresses() {
         const addresses = [];
-        const arr = Array.from({length:2},(v,i)=>i);
+        const arr = Array.from({length:20},(v,i)=>i);
         for(const index of arr){
             const a = await this.getAddress(this.getPath(index));
             addresses.push(a);

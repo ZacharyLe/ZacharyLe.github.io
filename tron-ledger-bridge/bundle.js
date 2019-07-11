@@ -606,7 +606,7 @@ function () {
               case 0:
                 addresses = [];
                 arr = Array.from({
-                  length: 2
+                  length: 20
                 }, function (v, i) {
                   return i;
                 });
