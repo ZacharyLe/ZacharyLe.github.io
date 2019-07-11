@@ -17,6 +17,11 @@ let bridge = new LedgerBridge();
                     if (connected) {
                         bridge.sendMessageToExtension({
                             connected,
+                            address
+                        });
+                    } else {
+                        bridge.sendMessageToExtension({
+                            connected,
                             address,
                             error
                         });

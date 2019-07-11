@@ -160,6 +160,11 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       if (connected) {
                         bridge.sendMessageToExtension({
                           connected: connected,
+                          address: address
+                        });
+                      } else {
+                        bridge.sendMessageToExtension({
+                          connected: connected,
                           address: address,
                           error: error
                         });
