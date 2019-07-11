@@ -33,13 +33,14 @@ export default class LedgerBridge {
                     let {address} = await trx.getAddress(this.path, confirm);
                     resolve({
                         address,
-                        connected: true,
+                        connected: true
                     });
                 } catch(e) {
                     console.log(e);
                     resolve({
                         address: false,
                         connected: false,
+                        error: e.message
                     });
                 } finally {
                     this.transport.close();

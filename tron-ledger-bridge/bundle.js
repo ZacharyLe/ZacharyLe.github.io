@@ -483,7 +483,8 @@ function () {
                             console.log(_context.t0);
                             resolve({
                               address: false,
-                              connected: false
+                              connected: false,
+                              error: _context.t0.message
                             });
 
                           case 16:
