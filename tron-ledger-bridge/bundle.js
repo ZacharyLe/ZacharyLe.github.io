@@ -186,7 +186,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
                       _context.t0 = console;
                       _context.next = 16;
-                      return bridge.getAddress();
+                      return bridge.getAddresses();
 
                     case 16:
                       _context.t1 = _context.sent;
