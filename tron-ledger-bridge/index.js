@@ -13,7 +13,11 @@ let bridge = new LedgerBridge();
             if(e.data.action === 'connect ledger'){
                 //let _isMounted = true;
                 //while (_isMounted) {
-                    let { connected, address, error = false } = await bridge.checkForConnection(true);
+                    let { connected, address, error = false } = await bridge.checkForConnection(true).catch(e=>({
+                            connected:false,
+                            address:false,
+                            error:'connect fail'
+                        }));
                     if (connected) {
                         bridge.sendMessageToExtension({
                             connected,

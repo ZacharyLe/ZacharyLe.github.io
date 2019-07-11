@@ -145,7 +145,13 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       }
 
                       _context.next = 4;
-                      return bridge.checkForConnection(true);
+                      return bridge.checkForConnection(true)["catch"](function (e) {
+                        return {
+                          connected: false,
+                          address: false,
+                          error: 'connect fail'
+                        };
+                      });
 
                     case 4:
                       _ref3 = _context.sent;
