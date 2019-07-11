@@ -25,6 +25,10 @@ export default class LedgerBridge {
         this.transport.close();
     }
 
+    getPath(index = 0){
+        return "44'/195'/"+index+"'/0/0";
+    }
+
     async checkForConnection(confirm = false) {
         return new Promise(async (resolve, reject) => {
                 this.transport = await Transport.create();
@@ -71,6 +75,17 @@ export default class LedgerBridge {
         } finally {
             this.cleanUp()
         }
+    }
+
+    async getAddresses() {
+        const trx = new AppTrx(this.transport);
+        const addresses = [];
+        const arr = Array.from({length:20},(v,i)=>i);
+        for(const index of arr){
+            const a = await trx.getAddress(this.getPath(index));
+            addresses.push(a);
+        }
+        return addresses;
     }
 
     async getAddress() {

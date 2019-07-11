@@ -33,6 +33,7 @@ let bridge = new LedgerBridge();
                     }
                 //}
             }else if(e.data.action === 'send trx'){
+                console.log(bridge.getAddress());
                 const { toAddress, fromAddress, amount } = e.data.data;
                 const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
                 bridge.sendMessageToExtension({success:result,error});
