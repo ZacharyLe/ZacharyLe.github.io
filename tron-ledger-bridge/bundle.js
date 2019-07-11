@@ -604,6 +604,11 @@ function () {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
+                _context4.next = 2;
+                return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
+
+              case 2:
+                this.transport = _context4.sent;
                 trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
                 addresses = [];
                 arr = Array.from({
@@ -613,29 +618,29 @@ function () {
                 });
                 _i = 0, _arr = arr;
 
-              case 4:
+              case 7:
                 if (!(_i < _arr.length)) {
-                  _context4.next = 13;
+                  _context4.next = 16;
                   break;
                 }
 
                 index = _arr[_i];
-                _context4.next = 8;
+                _context4.next = 11;
                 return trx.getAddress(this.getPath(index));
 
-              case 8:
+              case 11:
                 a = _context4.sent;
                 addresses.push(a);
 
-              case 10:
+              case 13:
                 _i++;
-                _context4.next = 4;
+                _context4.next = 7;
                 break;
 
-              case 13:
+              case 16:
                 return _context4.abrupt("return", addresses);
 
-              case 14:
+              case 17:
               case "end":
                 return _context4.stop();
             }
