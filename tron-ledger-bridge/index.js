@@ -10,6 +10,7 @@ let bridge = new LedgerBridge();
     window.addEventListener('message', async e => {
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
             let result, success;
+            console.log(e.data);
             if(e.data.action === 'connect ledger'){
                 //let _isMounted = true;
                 //while (_isMounted) {
