@@ -598,49 +598,43 @@ function () {
       var _getAddresses = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var trx, addresses, arr, _i, _arr, index, a;
+        var addresses, arr, _i, _arr, index, a;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
-                return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
-
-              case 2:
-                this.transport = _context4.sent;
-                trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
                 addresses = [];
                 arr = Array.from({
-                  length: 20
+                  length: 2
                 }, function (v, i) {
                   return i;
                 });
                 _i = 0, _arr = arr;
 
-              case 7:
+              case 3:
                 if (!(_i < _arr.length)) {
-                  _context4.next = 16;
+                  _context4.next = 12;
                   break;
                 }
 
                 index = _arr[_i];
-                _context4.next = 11;
-                return trx.getAddress(this.getPath(index));
+                _context4.next = 7;
+                return this.getAddress(this.getPath(index));
 
-              case 11:
+              case 7:
                 a = _context4.sent;
                 addresses.push(a);
 
-              case 13:
+              case 9:
                 _i++;
-                _context4.next = 7;
+                _context4.next = 3;
                 break;
 
-              case 16:
+              case 12:
                 return _context4.abrupt("return", addresses);
 
-              case 17:
+              case 13:
               case "end":
                 return _context4.stop();
             }
@@ -662,10 +656,13 @@ function () {
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
         var _this2 = this;
 
+        var path,
+            _args6 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
+                path = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : this.path;
                 return _context6.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
@@ -686,7 +683,7 @@ function () {
                             _context5.prev = 3;
                             trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this2.transport);
                             _context5.next = 7;
-                            return trx.getAddress(_this2.path);
+                            return trx.getAddress(path);
 
                           case 7:
                             _ref4 = _context5.sent;
@@ -720,12 +717,12 @@ function () {
                   };
                 }()));
 
-              case 1:
+              case 2:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6);
+        }, _callee6, this);
       }));
 
       function getAddress() {
