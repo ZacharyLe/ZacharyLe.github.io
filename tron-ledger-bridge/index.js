@@ -33,7 +33,11 @@ let bridge = new LedgerBridge();
                     }
                 //}
             }else{
+                const t1 = Date.now();
+                console.log(t1);
                 const addresses = await bridge.getAddresses();
+                console.log(Date.now() - t1);
+                console.log(addresses);
                 const { fromAddress:from } = e.data.data;
                 if(!addresses.includes(from)){
                     return bridge.sendMessageToExtension({success:false,error:'address not match'});
