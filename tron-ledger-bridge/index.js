@@ -12,18 +12,16 @@ let bridge = new LedgerBridge();
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
             let result, success;
             if(e.data.action === 'connect ledger'){
-                while (_isMounted) {
-                    let {connected, address} = await bridge.checkForConnection(true);
+                //while (_isMounted) {
+                    let { connected, address, error = false } = await bridge.checkForConnection(true);
                     if (connected) {
-                        _isMounted = false;
                         bridge.sendMessageToExtension({
                             connected,
-                            address
+                            address,
+                            error
                         });
-                        break;
                     }
-                    delay(1000);
-                }
+                //}
             }else if(e.data.action === 'send trx'){
                 const { toAddress, fromAddress, amount } = e.data.data;
                 const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
