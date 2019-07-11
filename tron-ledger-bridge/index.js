@@ -5,28 +5,32 @@ import LedgerBridge from './ledger/LedgerBridge'
 import { delay } from './ledger/utils';
 let bridge = new LedgerBridge();
 (async () => {
-    let _isMounted = true;
     //tronWeb.trx.sign = this.buildTransactionSigner(tronWeb);
     //return tronWeb;
     window.addEventListener('message', async e => {
         if (e && e.data && e.data.target === 'LEDGER-IFRAME') {
             let result, success;
             if(e.data.action === 'connect ledger'){
-                //while (_isMounted) {
+                let _isMounted = true;
+                while (_isMounted) {
                     let { connected, address, error = false } = await bridge.checkForConnection(true);
                     if (connected) {
                         bridge.sendMessageToExtension({
                             connected,
                             address
                         });
+                        _isMounted = false;
+                        break;
                     } else {
                         bridge.sendMessageToExtension({
                             connected,
                             address,
-                            error
+                            error,
+                            success:false
                         });
                     }
-                //}
+                    delay(1000);
+                }
             }else if(e.data.action === 'send trx'){
                 const { toAddress, fromAddress, amount } = e.data.data;
                 const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
