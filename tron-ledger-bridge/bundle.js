@@ -607,12 +607,18 @@ function () {
       var _getAddresses = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var addresses, arr, _i, _arr, index, a;
+        var trx, addresses, arr, _i, _arr, index, _ref3, address;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
+                _context4.next = 2;
+                return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
+
+              case 2:
+                this.transport = _context4.sent;
+                trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
                 addresses = [];
                 arr = Array.from({
                   length: 20
@@ -621,29 +627,30 @@ function () {
                 });
                 _i = 0, _arr = arr;
 
-              case 3:
+              case 7:
                 if (!(_i < _arr.length)) {
-                  _context4.next = 12;
+                  _context4.next = 17;
                   break;
                 }
 
                 index = _arr[_i];
-                _context4.next = 7;
-                return this.getAddress(this.getPath(index));
+                _context4.next = 11;
+                return trx.getAddress(this.getPath(index));
 
-              case 7:
-                a = _context4.sent;
-                addresses.push(a);
+              case 11:
+                _ref3 = _context4.sent;
+                address = _ref3.address;
+                addresses.push(address);
 
-              case 9:
+              case 14:
                 _i++;
-                _context4.next = 3;
+                _context4.next = 7;
                 break;
 
-              case 12:
+              case 17:
                 return _context4.abrupt("return", addresses);
 
-              case 13:
+              case 18:
               case "end":
                 return _context4.stop();
             }
@@ -675,10 +682,10 @@ function () {
                 return _context6.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+                  var _ref4 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(resolve, reject) {
-                    var trx, _ref4, address;
+                    var trx, _ref5, address;
 
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
                       while (1) {
@@ -695,8 +702,8 @@ function () {
                             return trx.getAddress(path);
 
                           case 7:
-                            _ref4 = _context5.sent;
-                            address = _ref4.address;
+                            _ref5 = _context5.sent;
+                            address = _ref5.address;
                             resolve(address);
                             _context5.next = 15;
                             break;
@@ -722,7 +729,7 @@ function () {
                   }));
 
                   return function (_x5, _x6) {
-                    return _ref3.apply(this, arguments);
+                    return _ref4.apply(this, arguments);
                   };
                 }()));
 
@@ -755,7 +762,7 @@ function () {
                 return _context8.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref5 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+                  var _ref6 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(resolve, reject) {
                     var trx, response;
@@ -800,7 +807,7 @@ function () {
                   }));
 
                   return function (_x8, _x9) {
-                    return _ref5.apply(this, arguments);
+                    return _ref6.apply(this, arguments);
                   };
                 }()));
 
@@ -824,7 +831,7 @@ function () {
       var _getTokenExtraInfo = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(ID) {
-        var tokenID, _ref6, id, precision, name;
+        var tokenID, _ref7, id, precision, name;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
           while (1) {
@@ -858,10 +865,10 @@ function () {
                 return tronWeb.trx.getTokenByID(tokenID);
 
               case 10:
-                _ref6 = _context9.sent;
-                id = _ref6.id;
-                precision = _ref6.precision;
-                name = _ref6.name;
+                _ref7 = _context9.sent;
+                id = _ref7.id;
+                precision = _ref7.precision;
+                name = _ref7.name;
                 return _context9.abrupt("return", {
                   id: id,
                   decimals: precision,
@@ -903,7 +910,7 @@ function () {
       return (
         /*#__PURE__*/
         function () {
-          var _ref7 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+          var _ref8 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
           /*#__PURE__*/
           _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(transaction) {
             var transactionObj, rawDataHex, raw, contractObj, contractType, tokenInfo, extra, ID, signedResponse;
@@ -970,7 +977,7 @@ function () {
           }));
 
           return function (_x11) {
-            return _ref7.apply(this, arguments);
+            return _ref8.apply(this, arguments);
           };
         }()
       );
