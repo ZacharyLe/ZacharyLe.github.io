@@ -625,7 +625,7 @@ function () {
                 trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
                 addresses = [];
                 arr = Array.from({
-                  length: 20
+                  length: 5
                 }, function (v, i) {
                   return i;
                 });

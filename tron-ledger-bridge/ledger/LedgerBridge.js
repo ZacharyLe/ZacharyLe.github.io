@@ -81,7 +81,7 @@ export default class LedgerBridge {
         this.transport = await Transport.create();
         const trx = new AppTrx(this.transport);
         const addresses = [];
-        const arr = Array.from({length:20},(v,i)=>i);
+        const arr = Array.from({length:5},(v,i)=>i);
         for(const index of arr){
             const { address } = await trx.getAddress(this.getPath(index));
             addresses.push(address);
