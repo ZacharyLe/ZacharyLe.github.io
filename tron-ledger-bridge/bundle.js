@@ -606,8 +606,9 @@ function () {
       var _getAddresses = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var trx, promise, arr, _i, _arr, index;
+        var _this2 = this;
 
+        var trx, promise;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -619,17 +620,14 @@ function () {
                 this.transport = _context4.sent;
                 trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
                 promise = [];
-                arr = Array.from({
+                Array.from({
                   length: 5
                 }, function (v, i) {
                   return i;
+                }).forEach(function (index) {
+                  promise.push(trx.getAddress(_this2.getPath(index)));
                 });
-
-                for (_i = 0, _arr = arr; _i < _arr.length; _i++) {
-                  index = _arr[_i];
-                  promise.push(trx.getAddress(this.getPath(index)));
-                }
-
+                console.log(promise);
                 return _context4.abrupt("return", promise);
 
               case 8:
@@ -652,7 +650,7 @@ function () {
       var _getAddress = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-        var _this2 = this;
+        var _this3 = this;
 
         var path,
             _args6 = arguments;
@@ -677,9 +675,9 @@ function () {
                             return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
 
                           case 2:
-                            _this2.transport = _context5.sent;
+                            _this3.transport = _context5.sent;
                             _context5.prev = 3;
-                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this2.transport);
+                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this3.transport);
                             _context5.next = 7;
                             return trx.getAddress(path);
 
@@ -698,7 +696,7 @@ function () {
                           case 15:
                             _context5.prev = 15;
 
-                            _this2.transport.close();
+                            _this3.transport.close();
 
                             return _context5.finish(15);
 
@@ -735,7 +733,7 @@ function () {
       var _signTransaction = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(transaction) {
-        var _this3 = this;
+        var _this4 = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
           while (1) {
@@ -756,11 +754,11 @@ function () {
                             return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
 
                           case 2:
-                            _this3.transport = _context7.sent;
+                            _this4.transport = _context7.sent;
                             _context7.prev = 3;
-                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this3.transport);
+                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this4.transport);
                             _context7.next = 7;
-                            return trx.signTransactionWithTokenName(_this3.path, transaction.hex, transaction.info);
+                            return trx.signTransactionWithTokenName(_this4.path, transaction.hex, transaction.info);
 
                           case 7:
                             response = _context7.sent;
@@ -776,7 +774,7 @@ function () {
                           case 14:
                             _context7.prev = 14;
 
-                            _this3.transport.close();
+                            _this4.transport.close();
 
                             return _context7.finish(14);
 
@@ -887,7 +885,7 @@ function () {
   }, {
     key: "buildTransactionSigner",
     value: function buildTransactionSigner(tronWeb) {
-      var _this4 = this;
+      var _this5 = this;
 
       return (
         /*#__PURE__*/
@@ -918,11 +916,11 @@ function () {
                     ID = tronWeb.toUtf8(transaction.raw_data.contract[0].parameter.value.asset_name); // get token info
 
                     _context10.next = 15;
-                    return _this4.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.asset_name);
+                    return _this5.getTokenExtraInfo(transaction.raw_data.contract[0].parameter.value.asset_name);
 
                   case 15:
                     extra = _context10.sent;
-                    tokenInfo.push(_this4.getLedgerTokenInfo(ID).message);
+                    tokenInfo.push(_this5.getLedgerTokenInfo(ID).message);
                     return _context10.abrupt("break", 20);
 
                   case 18:
@@ -934,7 +932,7 @@ function () {
                     extra.hash = transaction.txID; //const ledgerBridge = new LedgerBridge();
 
                     _context10.next = 23;
-                    return _this4.signTransaction({
+                    return _this5.signTransaction({
                       hex: rawDataHex,
                       info: tokenInfo
                     });
