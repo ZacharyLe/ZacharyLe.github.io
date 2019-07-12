@@ -82,7 +82,9 @@ export default class LedgerBridge {
         const trx = new AppTrx(this.transport);
         const promise = [];
         Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(trx.getAddress(this.getPath(index)))});
-        console.log(promise);
+        const res = await Promise.all(promise);
+        console.log(res);
+        //console.log(promise);
         return promise;
     }
 
