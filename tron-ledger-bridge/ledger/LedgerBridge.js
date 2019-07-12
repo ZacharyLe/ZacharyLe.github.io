@@ -79,19 +79,19 @@ export default class LedgerBridge {
 
     async getAddresses() {
         const promise = [];
-        this.transport = await Transport.create();
-        const trx = new AppTrx(this.transport);
-        console.log('ledger bridge 3333');
-        Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(this.getAddress(this.getPath(index),trx))});
+        console.log('ledger bridge 44444');
+        Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(this.getAddress(this.getPath(index)))});
         const addresses = await Promise.all(promise);
         console.log(addresses);
         //console.log(promise);
         return addresses;
     }
 
-    async getAddress(path = this.path,trx = null) {
+    async getAddress(path = this.path) {
         return new Promise(async (resolve, reject) => {
+            this.transport = await Transport.create();
             try {
+                const trx = new AppTrx(this.transport);
                 let {address} = await trx.getAddress(path);
                 resolve(address);
             } catch(e) {
