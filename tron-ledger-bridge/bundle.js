@@ -189,7 +189,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
 
                     case 18:
                       addresses = _context.sent;
-                      console.log(Date().now() - t1);
+                      console.log(Date.now() - t1);
                       console.log(addresses); // const { fromAddress:from } = e.data.data;
                       // if(address!==from){
                       //     return bridge.sendMessageToExtension({success:false,error:'address not match'});
