@@ -587,35 +587,41 @@ function () {
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var _this2 = this;
 
-        var promise, addresses;
+        var promise, trx, addresses;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 promise = [];
-                console.log('ledger bridge 22222');
+                _context4.next = 3;
+                return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
+
+              case 3:
+                this.transport = _context4.sent;
+                trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
+                console.log('ledger bridge 3333');
                 Array.from({
                   length: 5
                 }, function (v, i) {
                   return i;
                 }).forEach(function (index) {
-                  promise.push(_this2.getAddress(_this2.getPath(index)));
+                  promise.push(_this2.getAddress(_this2.getPath(index), trx));
                 });
-                _context4.next = 5;
+                _context4.next = 9;
                 return Promise.all(promise);
 
-              case 5:
+              case 9:
                 addresses = _context4.sent;
                 console.log(addresses); //console.log(promise);
 
                 return _context4.abrupt("return", addresses);
 
-              case 8:
+              case 12:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4);
+        }, _callee4, this);
       }));
 
       function getAddresses() {
@@ -633,59 +639,55 @@ function () {
         var _this3 = this;
 
         var path,
+            trx,
             _args6 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 path = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : this.path;
+                trx = _args6.length > 1 && _args6[1] !== undefined ? _args6[1] : null;
                 return _context6.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
                   var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(resolve, reject) {
-                    var trx, _ref4, address;
+                    var _ref4, address;
 
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
                       while (1) {
                         switch (_context5.prev = _context5.next) {
                           case 0:
-                            _context5.next = 2;
-                            return _ledgerhq_hw_transport_u2f__WEBPACK_IMPORTED_MODULE_6___default.a.create();
-
-                          case 2:
-                            _this3.transport = _context5.sent;
-                            _context5.prev = 3;
-                            trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](_this3.transport);
-                            _context5.next = 7;
+                            _context5.prev = 0;
+                            _context5.next = 3;
                             return trx.getAddress(path);
 
-                          case 7:
+                          case 3:
                             _ref4 = _context5.sent;
                             address = _ref4.address;
                             resolve(address);
-                            _context5.next = 15;
+                            _context5.next = 11;
                             break;
 
-                          case 12:
-                            _context5.prev = 12;
-                            _context5.t0 = _context5["catch"](3);
+                          case 8:
+                            _context5.prev = 8;
+                            _context5.t0 = _context5["catch"](0);
                             reject(_context5.t0);
 
-                          case 15:
-                            _context5.prev = 15;
+                          case 11:
+                            _context5.prev = 11;
 
                             _this3.transport.close();
 
-                            return _context5.finish(15);
+                            return _context5.finish(11);
 
-                          case 18:
+                          case 14:
                           case "end":
                             return _context5.stop();
                         }
                       }
-                    }, _callee5, null, [[3, 12, 15, 18]]);
+                    }, _callee5, null, [[0, 8, 11, 14]]);
                   }));
 
                   return function (_x5, _x6) {
@@ -693,7 +695,7 @@ function () {
                   };
                 }()));
 
-              case 2:
+              case 3:
               case "end":
                 return _context6.stop();
             }
