@@ -33,6 +33,8 @@ let bridge = new LedgerBridge();
                         });
                     }
                 //}
+            }else if(e.data.action === 'cancel transaction') {
+                bridge.cleanUp();
             }else{
                 const t1 = Date.now();
                 console.log(t1);
