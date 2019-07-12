@@ -37,18 +37,18 @@ let bridge = new LedgerBridge();
                 const t1 = Date.now();
                 console.log(t1);
                 console.log('@@@#######');
-                const promises = await bridge.getAddresses();
+                const addresses = await bridge.getAddresses();
 
                 console.log('######');
-                //console.log(address);
+                console.log(address);
                 // const { fromAddress:from } = e.data.data;
                 // if(address!==from){
                 //     return bridge.sendMessageToExtension({success:false,error:'address not match'});
                 // }
                 if(e.data.action === 'send trx'){
-                    const { toAddress, fromAddress, amount } = e.data.data;
-                    const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
-                    bridge.sendMessageToExtension({success:result,error});
+                    // const { toAddress, fromAddress, amount } = e.data.data;
+                    // const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
+                    // bridge.sendMessageToExtension({success:result,error});
                 }else if(e.data.action === 'send trc10'){
                     const { id, toAddress, fromAddress, amount } = e.data.data;
                     const { result, error='' } = await tronWeb.trx.sendToken(toAddress, amount, id,{address: fromAddress}, error=>({result:error ? false : true,error}));
