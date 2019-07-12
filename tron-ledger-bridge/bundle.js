@@ -621,7 +621,6 @@ function () {
             switch (_context4.prev = _context4.next) {
               case 0:
                 promise = [];
-                console.log('ledger bridge 44444');
                 Array.from({
                   length: 5
                 }, function (v, i) {
@@ -629,16 +628,14 @@ function () {
                 }).forEach(function (index) {
                   promise.push(_this2.getAddress(_this2.getPath(index)));
                 });
-                _context4.next = 5;
+                _context4.next = 4;
                 return Promise.all(promise);
 
-              case 5:
+              case 4:
                 addresses = _context4.sent;
-                console.log(addresses); //console.log(promise);
-
                 return _context4.abrupt("return", addresses);
 
-              case 8:
+              case 6:
               case "end":
                 return _context4.stop();
             }
