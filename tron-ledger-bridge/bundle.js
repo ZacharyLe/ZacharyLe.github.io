@@ -606,7 +606,7 @@ function () {
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var _this2 = this;
 
-        var trx, promise, res;
+        var trx, promise;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -625,16 +625,14 @@ function () {
                 }).forEach(function (index) {
                   promise.push(trx.getAddress(_this2.getPath(index)));
                 });
-                _context4.next = 8;
-                return Promise.all(promise);
-
-              case 8:
-                res = _context4.sent;
-                console.log(res); //console.log(promise);
+                Promise.all(promise).then(function (res) {
+                  console.log(res);
+                }); //console.log(res);
+                //console.log(promise);
 
                 return _context4.abrupt("return", promise);
 
-              case 11:
+              case 8:
               case "end":
                 return _context4.stop();
             }
