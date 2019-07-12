@@ -128,14 +128,14 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
             var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
             /*#__PURE__*/
             _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-              var result, success, _ref3, connected, address, _ref3$error, error, t1, _address, from, _e$data$data, toAddress, fromAddress, amount, _ref4, _result, _ref4$error, _error, _e$data$data2, id, _toAddress, _fromAddress, _amount, _ref5, _result2, _ref5$error, _error2, _e$data$data3, _id, _toAddress2, _fromAddress2, _amount2, decimals, TokenName, unSignTransaction, signedTransaction, broadcast;
+              var result, success, _ref3, connected, address, _ref3$error, error, t1, promises, addresses, _e$data$data, toAddress, fromAddress, amount, _ref4, _result, _ref4$error, _error, _e$data$data2, id, _toAddress, _fromAddress, _amount, _ref5, _result2, _ref5$error, _error2, _e$data$data3, _id, _toAddress2, _fromAddress2, _amount2, decimals, TokenName, unSignTransaction, signedTransaction, broadcast;
 
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
                       if (!(e && e.data && e.data.target === 'LEDGER-IFRAME')) {
-                        _context.next = 63;
+                        _context.next = 62;
                         break;
                       }
 
@@ -177,38 +177,32 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                       } //}
 
 
-                      _context.next = 63;
+                      _context.next = 62;
                       break;
 
                     case 13:
                       t1 = Date.now();
-                      _context.next = 16;
-                      return bridge.getAddress();
+                      console.log(t1);
+                      promises = bridge.getAddresses();
+                      _context.next = 18;
+                      return Promise.all(promises);
 
-                    case 16:
-                      _address = _context.sent;
-                      console.log(Date.now() - t1);
-                      console.log(_address);
-                      from = e.data.data.fromAddress;
+                    case 18:
+                      addresses = _context.sent;
+                      console.log(addresses);
+                      console.log(Date.now() - t1); //console.log(address);
+                      // const { fromAddress:from } = e.data.data;
+                      // if(address!==from){
+                      //     return bridge.sendMessageToExtension({success:false,error:'address not match'});
+                      // }
 
-                      if (!(_address !== from)) {
-                        _context.next = 22;
-                        break;
-                      }
-
-                      return _context.abrupt("return", bridge.sendMessageToExtension({
-                        success: false,
-                        error: 'address not match'
-                      }));
-
-                    case 22:
                       if (!(e.data.action === 'send trx')) {
-                        _context.next = 33;
+                        _context.next = 32;
                         break;
                       }
 
                       _e$data$data = e.data.data, toAddress = _e$data$data.toAddress, fromAddress = _e$data$data.fromAddress, amount = _e$data$data.amount;
-                      _context.next = 26;
+                      _context.next = 25;
                       return tronWeb.trx.sendTransaction(toAddress, amount, {
                         address: fromAddress
                       }, function (error) {
@@ -218,7 +212,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         };
                       });
 
-                    case 26:
+                    case 25:
                       _ref4 = _context.sent;
                       _result = _ref4.result;
                       _ref4$error = _ref4.error;
@@ -227,17 +221,17 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         success: _result,
                         error: _error
                       });
-                      _context.next = 63;
+                      _context.next = 62;
                       break;
 
-                    case 33:
+                    case 32:
                       if (!(e.data.action === 'send trc10')) {
-                        _context.next = 44;
+                        _context.next = 43;
                         break;
                       }
 
                       _e$data$data2 = e.data.data, id = _e$data$data2.id, _toAddress = _e$data$data2.toAddress, _fromAddress = _e$data$data2.fromAddress, _amount = _e$data$data2.amount;
-                      _context.next = 37;
+                      _context.next = 36;
                       return tronWeb.trx.sendToken(_toAddress, _amount, id, {
                         address: _fromAddress
                       }, function (error) {
@@ -247,7 +241,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         };
                       });
 
-                    case 37:
+                    case 36:
                       _ref5 = _context.sent;
                       _result2 = _ref5.result;
                       _ref5$error = _ref5.error;
@@ -256,17 +250,17 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         success: _result2,
                         error: _error2
                       });
-                      _context.next = 63;
+                      _context.next = 62;
                       break;
 
-                    case 44:
+                    case 43:
                       if (!(e.data.action === 'send trc20')) {
-                        _context.next = 63;
+                        _context.next = 62;
                         break;
                       }
 
                       _e$data$data3 = e.data.data, _id = _e$data$data3.id, _toAddress2 = _e$data$data3.toAddress, _fromAddress2 = _e$data$data3.fromAddress, _amount2 = _e$data$data3.amount, decimals = _e$data$data3.decimals, TokenName = _e$data$data3.TokenName;
-                      _context.next = 48;
+                      _context.next = 47;
                       return tronWeb.transactionBuilder.triggerSmartContract(tronWeb.address.toHex(_id), 'transfer(address,uint256)', 10000000, 0, [{
                         type: 'address',
                         value: tronWeb.address.toHex(_toAddress2)
@@ -275,11 +269,11 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         value: _amount2
                       }], tronWeb.address.toHex(_fromAddress2));
 
-                    case 48:
+                    case 47:
                       unSignTransaction = _context.sent;
 
                       if (!(unSignTransaction.transaction !== undefined)) {
-                        _context.next = 63;
+                        _context.next = 62;
                         break;
                       }
 
@@ -290,7 +284,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         token_name: TokenName,
                         amount: _amount2
                       };
-                      _context.next = 54;
+                      _context.next = 53;
                       return tronWeb.trx.sign(unSignTransaction, false)["catch"](function (error) {
                         return {
                           result: error ? false : true,
@@ -298,11 +292,11 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         };
                       });
 
-                    case 54:
+                    case 53:
                       signedTransaction = _context.sent;
 
                       if (!(signedTransaction.hasOwnProperty('result') && !signedTransaction.result)) {
-                        _context.next = 59;
+                        _context.next = 58;
                         break;
                       }
 
@@ -310,14 +304,14 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         success: false,
                         error: signedTransaction.error
                       });
-                      _context.next = 63;
+                      _context.next = 62;
                       break;
 
-                    case 59:
-                      _context.next = 61;
+                    case 58:
+                      _context.next = 60;
                       return tronWeb.trx.sendRawTransaction(signedTransaction);
 
-                    case 61:
+                    case 60:
                       broadcast = _context.sent;
 
                       if (broadcast.result) {
@@ -326,7 +320,7 @@ _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function 
                         });
                       }
 
-                    case 63:
+                    case 62:
                     case "end":
                       return _context.stop();
                   }
@@ -612,7 +606,7 @@ function () {
       var _getAddresses = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var trx, addresses, arr, _i, _arr, index, _ref3, address;
+        var trx, promise, arr, _i, _arr, index;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
@@ -624,38 +618,21 @@ function () {
               case 2:
                 this.transport = _context4.sent;
                 trx = new _Tron__WEBPACK_IMPORTED_MODULE_5__["default"](this.transport);
-                addresses = [];
+                promise = [];
                 arr = Array.from({
                   length: 5
                 }, function (v, i) {
                   return i;
                 });
-                _i = 0, _arr = arr;
 
-              case 7:
-                if (!(_i < _arr.length)) {
-                  _context4.next = 17;
-                  break;
+                for (_i = 0, _arr = arr; _i < _arr.length; _i++) {
+                  index = _arr[_i];
+                  promise.push(trx.getAddress(this.getPath(index)));
                 }
 
-                index = _arr[_i];
-                _context4.next = 11;
-                return trx.getAddress(this.getPath(index));
+                return _context4.abrupt("return", promise);
 
-              case 11:
-                _ref3 = _context4.sent;
-                address = _ref3.address;
-                addresses.push(address);
-
-              case 14:
-                _i++;
-                _context4.next = 7;
-                break;
-
-              case 17:
-                return _context4.abrupt("return", addresses);
-
-              case 18:
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -687,10 +664,10 @@ function () {
                 return _context6.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref4 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+                  var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(resolve, reject) {
-                    var trx, _ref5, address;
+                    var trx, _ref4, address;
 
                     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
                       while (1) {
@@ -707,8 +684,8 @@ function () {
                             return trx.getAddress(path);
 
                           case 7:
-                            _ref5 = _context5.sent;
-                            address = _ref5.address;
+                            _ref4 = _context5.sent;
+                            address = _ref4.address;
                             resolve(address);
                             _context5.next = 15;
                             break;
@@ -734,7 +711,7 @@ function () {
                   }));
 
                   return function (_x5, _x6) {
-                    return _ref4.apply(this, arguments);
+                    return _ref3.apply(this, arguments);
                   };
                 }()));
 
@@ -767,7 +744,7 @@ function () {
                 return _context8.abrupt("return", new Promise(
                 /*#__PURE__*/
                 function () {
-                  var _ref6 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+                  var _ref5 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
                   /*#__PURE__*/
                   _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(resolve, reject) {
                     var trx, response;
@@ -812,7 +789,7 @@ function () {
                   }));
 
                   return function (_x8, _x9) {
-                    return _ref6.apply(this, arguments);
+                    return _ref5.apply(this, arguments);
                   };
                 }()));
 
@@ -836,7 +813,7 @@ function () {
       var _getTokenExtraInfo = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9(ID) {
-        var tokenID, _ref7, id, precision, name;
+        var tokenID, _ref6, id, precision, name;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
           while (1) {
@@ -870,10 +847,10 @@ function () {
                 return tronWeb.trx.getTokenByID(tokenID);
 
               case 10:
-                _ref7 = _context9.sent;
-                id = _ref7.id;
-                precision = _ref7.precision;
-                name = _ref7.name;
+                _ref6 = _context9.sent;
+                id = _ref6.id;
+                precision = _ref6.precision;
+                name = _ref6.name;
                 return _context9.abrupt("return", {
                   id: id,
                   decimals: precision,
@@ -915,7 +892,7 @@ function () {
       return (
         /*#__PURE__*/
         function () {
-          var _ref8 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
+          var _ref7 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()(
           /*#__PURE__*/
           _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(transaction) {
             var transactionObj, rawDataHex, raw, contractObj, contractType, tokenInfo, extra, ID, signedResponse;
@@ -982,7 +959,7 @@ function () {
           }));
 
           return function (_x11) {
-            return _ref8.apply(this, arguments);
+            return _ref7.apply(this, arguments);
           };
         }()
       );

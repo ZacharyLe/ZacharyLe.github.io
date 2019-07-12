@@ -35,13 +35,16 @@ let bridge = new LedgerBridge();
                 //}
             }else{
                 const t1 = Date.now();
-                const address = await bridge.getAddress();
+                console.log(t1);
+                const promises = bridge.getAddresses();
+                const addresses = await Promise.all(promises);
+                console.log(addresses);
                 console.log(Date.now() - t1);
-                console.log(address);
-                const { fromAddress:from } = e.data.data;
-                if(address!==from){
-                    return bridge.sendMessageToExtension({success:false,error:'address not match'});
-                }
+                //console.log(address);
+                // const { fromAddress:from } = e.data.data;
+                // if(address!==from){
+                //     return bridge.sendMessageToExtension({success:false,error:'address not match'});
+                // }
                 if(e.data.action === 'send trx'){
                     const { toAddress, fromAddress, amount } = e.data.data;
                     const { result, error='' } = await tronWeb.trx.sendTransaction(toAddress, amount, {address: fromAddress}, error=>({result:error ? false : true,error}));
