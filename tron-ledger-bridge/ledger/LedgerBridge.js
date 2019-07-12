@@ -79,14 +79,12 @@ export default class LedgerBridge {
 
     async getAddresses() {
         const promise = [];
-        console.log('ledger bridge');
+        console.log('ledger bridge 22222');
         Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(this.getAddress(this.getPath(index)))});
-        Promise.all(promise).then(res=>{
-            console.log(res);
-        });
-        //console.log(res);
+        const addresses = await Promise.all(promise);
+        console.log(addresses);
         //console.log(promise);
-        return promise;
+        return addresses;
     }
 
     async getAddress(path = this.path) {

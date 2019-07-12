@@ -607,13 +607,13 @@ function () {
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var _this2 = this;
 
-        var promise;
+        var promise, addresses;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 promise = [];
-                console.log('ledger bridge');
+                console.log('ledger bridge 22222');
                 Array.from({
                   length: 5
                 }, function (v, i) {
@@ -621,14 +621,16 @@ function () {
                 }).forEach(function (index) {
                   promise.push(_this2.getAddress(_this2.getPath(index)));
                 });
-                Promise.all(promise).then(function (res) {
-                  console.log(res);
-                }); //console.log(res);
-                //console.log(promise);
-
-                return _context4.abrupt("return", promise);
+                _context4.next = 5;
+                return Promise.all(promise);
 
               case 5:
+                addresses = _context4.sent;
+                console.log(addresses); //console.log(promise);
+
+                return _context4.abrupt("return", addresses);
+
+              case 8:
               case "end":
                 return _context4.stop();
             }
