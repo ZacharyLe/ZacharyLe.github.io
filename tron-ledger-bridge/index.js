@@ -36,7 +36,6 @@ let bridge = new LedgerBridge();
             }else{
                 const t1 = Date.now();
                 console.log(t1);
-                console.log('@@@#######');
                 const addresses = await bridge.getAddresses();
                 console.log(Date.now() - t1);
                 console.log(addresses);
