@@ -14,10 +14,6 @@ let bridge = new LedgerBridge();
             if(e.data.action === 'connect ledger'){
                 //let _isMounted = true;
                 //while (_isMounted) {
-                    const t1 = Date.now();
-                    const addresses = await bridge.getAddresses();
-                    console.log(addresses);
-                    console.log(Date.now() - t1);
                     let { connected, address, error = false } = await bridge.checkForConnection(true).catch(e=>({
                             connected:false,
                             address:false,
