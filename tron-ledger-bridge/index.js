@@ -14,6 +14,10 @@ let bridge = new LedgerBridge();
             if(e.data.action === 'connect ledger'){
                 //let _isMounted = true;
                 //while (_isMounted) {
+                    const t1 = Date.now();
+                    const addresses = await bridge.getAddresses();
+                    console.log(addresses);
+                    console.log(Date.now() - t1);
                     let { connected, address, error = false } = await bridge.checkForConnection(true).catch(e=>({
                             connected:false,
                             address:false,
@@ -36,11 +40,7 @@ let bridge = new LedgerBridge();
             }else if(e.data.action === 'cancel transaction') {
                 bridge.cleanUp();
             }else{
-                const t1 = Date.now();
-                console.log(t1);
                 const address = await bridge.getAddress();
-                console.log(Date.now() - t1);
-                console.log(address);
                 const { fromAddress:from } = e.data.data;
                 if(address!==from){
                     return bridge.sendMessageToExtension({success:false,error:'address not match'});

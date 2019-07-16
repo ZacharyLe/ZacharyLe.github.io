@@ -77,19 +77,19 @@ export default class LedgerBridge {
         }
     }
 
-    async getAddresses() {
+    async getAddresses(boolDisplay = false,boolChaincode = false) {
         const promise = [];
-        Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(this.getAddress(this.getPath(index)))});
+        Array.from({length:5},(v,i)=>i).forEach(index=>{promise.push(this.getAddress(this.getPath(index),boolDisplay,boolChaincode))});
         const addresses = await Promise.all(promise);
         return addresses;
     }
 
-    async getAddress(path = this.path) {
+    async getAddress(path = this.path,boolDisplay,boolChaincode) {
         return new Promise(async (resolve, reject) => {
             this.transport = await Transport.create();
             try {
                 const trx = new AppTrx(this.transport);
-                let {address} = await trx.getAddress(path);
+                let {address} = await trx.getAddress(path,boolDisplay,boolChaincode);
                 resolve(address);
             } catch(e) {
                 reject(e);

@@ -139,13 +139,13 @@ export default class Trx {
         console.log("FULL SEND", buffers.map(([startByte, data]) => data.toString("hex")).join(""));
         let response;
         return foreach(buffers, ([startByte, data]) => {
-                console.log("SENDING", startByte, data.length, data.toString("hex"));
-        return this.transport
+            console.log("SENDING", startByte, data.length, data.toString("hex"));
+            return this.transport
                 .send(CLA, 0x04, startByte, 0x00, data)
                 .then(apduResponse => {
-                response = apduResponse;
-    });
-    }).then(() => response);
+                    response = apduResponse;
+                });
+        }).then(() => response);
     }
     /**
      * sign a Tron transaction with a given BIP 32 path and Token Names
@@ -237,12 +237,12 @@ export default class Trx {
         let response;
         return foreach(buffers, ([startByte, data]) => {
                 console.log("SENDING", startByte, data.length, data.toString("hex"));
-        return this.transport
+                return this.transport
                 .send(CLA, SIGN, startByte, 0x00, data)
                 .then(apduResponse => {
-                response = apduResponse;
-    });
-    }).then(() => response.slice(0,65));
+                    response = apduResponse;
+                });
+        }).then(() => response.slice(0,65));
 
     }
     /**
